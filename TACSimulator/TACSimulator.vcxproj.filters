@@ -18,12 +18,21 @@
     <ClCompile Include="TACSimulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Assembler\lexer.cpp">
+    <ClCompile Include="src\Assembler\Lexer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Assembler\Assembler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Assembler\lexer.h">
+    <ClInclude Include="include\Assembler\Lexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Assembler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

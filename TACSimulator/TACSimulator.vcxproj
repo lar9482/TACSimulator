@@ -127,11 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Assembler\lexer.cpp" />
+    <ClCompile Include="src\Assembler\Assembler.cpp" />
+    <ClCompile Include="src\Assembler\Lexer.cpp" />
     <ClCompile Include="TACSimulator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Assembler\lexer.h" />
+    <ClInclude Include="include\Assembler\Assembler.h" />
+    <ClInclude Include="include\Assembler\Lexer.h" />
+    <ClInclude Include="include\Assembler\Token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
