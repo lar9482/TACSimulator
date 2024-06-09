@@ -8,8 +8,6 @@
 using std::string;
 using std::pair;
 using std::queue;
-using std::unique_ptr;
-using std::make_unique;
 
 queue<Token> Lexer::scanProgram(string& program) {
 	queue<Token> allTokens;
@@ -24,10 +22,8 @@ queue<Token> Lexer::scanProgram(string& program) {
 				allTokens.push(resolveIdentifier(longestMatch)); break;
 			case MatchType::OneSymbol:
 				allTokens.push(resolveOneSymbol(longestMatch)); break;
-				break;
 			case MatchType::Integer:
-				allTokens.push(Token(longestMatch, TokenType::integer, lineCounter, columnCounter));
-				break;
+				allTokens.push(Token(longestMatch, TokenType::integer, lineCounter, columnCounter)); break;
 			case MatchType::Whitespace:
 				if (longestMatch == "\n") {
 					columnCounter = 1;
