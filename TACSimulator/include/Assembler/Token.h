@@ -30,14 +30,14 @@ enum class TokenType {
     r24_Reg,
     r25_Reg,
     r26_Reg,
-    r27_Reg,
     rSP_Reg, //Stack pointer register
     rFP_Reg, //Frame pointer register 
     rRET_Reg, //Return pointer register
     rHI_Reg, //Holds truncated result from division
     rLO_Reg, //Holds remainder from truncated result
+    rIP_Reg, //The instruction pointer
 
-    //Register instructions(opcode reg, reg)
+    //Register instructions(opcode reg, reg, reg)
     mov_Inst,
     add_Inst,
     sub_Inst,
@@ -51,7 +51,7 @@ enum class TokenType {
     sllv_Inst,
     srav_Inst,
 
-    //Immediate instructions(opcode reg, integer)
+    //Immediate instructions(opcode reg, reg, integer)
     movI_Inst,
     addI_Inst,
     subI_Inst,
@@ -60,6 +60,8 @@ enum class TokenType {
     andI_Inst,
     orI_Inst,
     xorI_Inst,
+    notI_Inst,
+    norI_Inst,
     sll_Inst,
     sra_Inst,
 
@@ -68,6 +70,8 @@ enum class TokenType {
     bNe_Inst,
     bLt_Inst,
     bGt_Inst,
+    bLTz_Inst,
+    bGTz_Inst,
 
     //Jump instructions (opcode label:) or (opcode reg)
     jmp_Inst, //(opcode label)
