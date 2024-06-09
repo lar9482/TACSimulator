@@ -86,7 +86,8 @@ pair<MatchType, string> Lexer::findLongestMatch(string const& program) const {
 string Lexer::matchIdentifer(string const& program) const {
 	string identifier = "";
 	int i = 0;
-	if ((program[i] >= 'a' && program[i] <= 'z') || (program[i] >= 'A' && program[i] <= 'Z')) {
+	if ((program[i] >= 'a' && program[i] <= 'z') || 
+		(program[i] >= 'A' && program[i] <= 'Z')) {
 		identifier += program[i];
 		i++;
 	}
@@ -94,11 +95,9 @@ string Lexer::matchIdentifer(string const& program) const {
 		return identifier;
 	}
 
-	while (
-		(program[i] >= 'a' && program[i] <= 'z') || 
+	while ((program[i] >= 'a' && program[i] <= 'z') || 
 		(program[i] >= 'A' && program[i] <= 'Z') ||
-		(program[i] >= '0' && program[i] <= '9')
-	) {
+		(program[i] >= '0' && program[i] <= '9')) {
 		identifier += program[i];
 		i++;
 	}
@@ -112,12 +111,8 @@ string Lexer::matchIdentifer(string const& program) const {
 string Lexer::matchWhitespace(string const& program) const {
 	string whitespace = "";
 
-	if (
-		program[0] == '\r' ||
-		program[0] == '\n' ||
-		program[0] == '\t' ||
-		program[0] == ' '
-	) {
+	if (program[0] == '\r' || program[0] == '\n' ||
+		program[0] == '\t' || program[0] == ' ') {
 		whitespace += program[0];
 	}
 
@@ -129,12 +124,8 @@ string Lexer::matchWhitespace(string const& program) const {
  */
 string Lexer::matchOneSymbol(string const& program) const {
 	string oneSymbol = "";
-	if (
-		program[0] == ',' ||
-		program[0] == ':' ||
-		program[0] == '[' ||
-		program[0] == ']'
-	) {
+	if (program[0] == ',' || program[0] == ':' ||
+		program[0] == '[' || program[0] == ']') {
 		oneSymbol += program[0];
 	}
 
@@ -152,9 +143,7 @@ string Lexer::matchInteger(string const& program) const {
 		i++;
 	}
 
-	while (
-		program[i] >= '0' && program[i] <= '9'
-	) {
+	while (program[i] >= '0' && program[i] <= '9') {
 		integer += program[i];
 		i++;
 	}
