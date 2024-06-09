@@ -14,7 +14,7 @@ void assembleFile(string const& filePath) {
 	string program = readProgramFromFile(filePath);
 	
 	Lexer lexer;
-	unique_ptr<queue<Token>> tokenQueue = lexer.scanProgram(program);
+	queue<Token> tokenQueue = lexer.scanProgram(program);
 }
 
 string readProgramFromFile(string const& filePath) {

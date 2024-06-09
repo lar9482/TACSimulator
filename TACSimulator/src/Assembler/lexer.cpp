@@ -11,8 +11,8 @@ using std::queue;
 using std::unique_ptr;
 using std::make_unique;
 
-unique_ptr<queue<Token>> Lexer::scanProgram(string& program) {
-	unique_ptr<queue<Token>> allTokens = make_unique<queue<Token>>();
+queue<Token> Lexer::scanProgram(string& program) {
+	queue<Token> allTokens;
 
 	while (program.length() > 0) {
 		pair<MatchType, string> longestMatchWithType = findLongestMatch(program);
@@ -21,12 +21,12 @@ unique_ptr<queue<Token>> Lexer::scanProgram(string& program) {
 
 		switch (type) {
 			case MatchType::Identifier: 
-				allTokens->push(resolveIdentifier(longestMatch)); break;
+				allTokens.push(resolveIdentifier(longestMatch)); break;
 			case MatchType::OneSymbol:
-				allTokens->push(resolveOneSymbol(longestMatch)); break;
+				allTokens.push(resolveOneSymbol(longestMatch)); break;
 				break;
 			case MatchType::Integer:
-				allTokens->push(Token(longestMatch, TokenType::integer, lineCounter, columnCounter));
+				allTokens.push(Token(longestMatch, TokenType::integer, lineCounter, columnCounter));
 				break;
 			case MatchType::Whitespace:
 				if (longestMatch == "\n") {
