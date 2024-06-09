@@ -9,11 +9,6 @@ using std::string;
 using std::pair;
 using std::queue;
 
-Lexer::Lexer() : 
-	lineCounter(1), 
-	columnCounter(1) 
-{}
-
 queue<Token> Lexer::scanProgram(string& program) {
 	queue<Token> allTokens;
 
@@ -78,6 +73,10 @@ pair<MatchType, string> Lexer::findLongestMatch(string const& program) const {
 		longestMatchType = MatchType::Whitespace;
 		longestMatchLength = whitespaceMatchLength;
 		longestMatch = possibleWhitespaceMatch;
+	}
+
+	if (longestMatchLength == 0) {
+		throw std::runtime_error("Unable to find a longest match");
 	}
 
 	pair<MatchType, string> longestMatchWithType;

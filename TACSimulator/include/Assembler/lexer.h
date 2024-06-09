@@ -26,6 +26,6 @@ private:
 	Token resolveOneSymbol(std::string const& oneSymbol) const;
 
 public:
-	Lexer();
+	Lexer() : lineCounter(1), columnCounter(1) {}
 	std::queue<Token> scanProgram(std::string& program);
 };

@@ -14,6 +14,7 @@ void assembleFile(string const& filePath) {
 	
 	Lexer lexer;
 	queue<Token> tokenQueue = lexer.scanProgram(program);
+
 }
 
 string readProgramFromFile(string const& filePath) {
