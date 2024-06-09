@@ -3,6 +3,7 @@
 #include <string>
 #include <utility>
 #include <queue>
+#include <memory>
 #include "Token.h"
 
 enum class MatchType {
@@ -27,5 +28,5 @@ private:
 
 public:
 	Lexer() : lineCounter(1), columnCounter(1) {}
-	std::queue<Token> scanProgram(std::string& program);
+	std::unique_ptr<std::queue<Token>> scanProgram(std::string& program);
 };

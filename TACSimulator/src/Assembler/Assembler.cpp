@@ -2,27 +2,26 @@
 #include <fstream>
 #include <sstream>
 #include <queue>
-
+#include <memory>
 #include "../Assembler/Assembler.h"
 #include "../Assembler/Lexer.h"
 
 using std::string;
 using std::queue;
+using std::unique_ptr;
 
 void assembleFile(string const& filePath) {
 	string program = readProgramFromFile(filePath);
 	
 	Lexer lexer;
-	queue<Token> tokenQueue = lexer.scanProgram(program);
-
+	unique_ptr<queue<Token>> tokenQueue = lexer.scanProgram(program);
 }
 
 string readProgramFromFile(string const& filePath) {
 	std::ifstream file(filePath);
 
 	if (!file) {
-		UnableToReadFromFileException exception(filePath);
-		throw exception;
+		throw UnableToReadFromFileException(filePath);
 	}
 
 	std::ostringstream ss;

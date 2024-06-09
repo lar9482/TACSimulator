@@ -35,5 +35,8 @@
     <ClInclude Include="include\Assembler\Assembler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\Inst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
