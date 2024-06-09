@@ -3,34 +3,50 @@
 #include <utility>
 #include <stdexcept>
 #include <iostream>
+#include <queue>
 
 using std::string;
 using std::pair;
+using std::queue;
 
-void Lexer::scanProgram(string& program) {
+Lexer::Lexer() : 
+	lineCounter(1), 
+	columnCounter(1) 
+{}
+
+queue<Token> Lexer::scanProgram(string& program) {
+	queue<Token> allTokens;
+
 	while (program.length() > 0) {
 		pair<MatchType, string> longestMatchWithType = findLongestMatch(program);
 		MatchType type = longestMatchWithType.first;
 		string longestMatch = longestMatchWithType.second;
 
 		switch (type) {
-			case MatchType::Identifier:
-				break;
+			case MatchType::Identifier: 
+				allTokens.push(resolveIdentifier(longestMatch)); break;
 			case MatchType::OneSymbol:
+				allTokens.push(resolveOneSymbol(longestMatch)); break;
 				break;
 			case MatchType::Integer:
+				allTokens.push(Token(longestMatch, TokenType::integer, lineCounter, columnCounter));
 				break;
 			case MatchType::Whitespace:
+				if (longestMatch == "\n") {
+					columnCounter = 1;
+					lineCounter++;
+				}
 				break;
 			default:
 				throw std::runtime_error("Unable to match type");
 				break;
 		}
-		if (type != MatchType::Whitespace) {
-			std::cout << longestMatch << std::endl;
-		}
+
+		columnCounter += static_cast<int>(longestMatch.size());
 		program.erase(0, longestMatch.size());
 	}
+
+	return allTokens;
 }
 
 pair<MatchType, string> Lexer::findLongestMatch(string const& program) const {
@@ -233,10 +249,10 @@ Token Lexer::resolveIdentifier(string const& identifier) const {
 	else return Token(identifier, TokenType::identifier, lineCounter, columnCounter);
 }
 
-Token Lexer::resolveInteger(string const& integer) const {
-	return Token("", TokenType::addI_Inst, 0, 0);
-}
-
 Token Lexer::resolveOneSymbol(string const& oneSymbol) const {
-	return Token("", TokenType::addI_Inst, 0, 0);
+	if (oneSymbol == ",") return Token(oneSymbol, TokenType::comma, lineCounter, columnCounter); 
+	else if (oneSymbol == ":") return Token(oneSymbol, TokenType::colon, lineCounter, columnCounter);
+	else if (oneSymbol == "[") return Token(oneSymbol, TokenType::startBracket, lineCounter, columnCounter);
+	else if (oneSymbol == "]") return Token(oneSymbol, TokenType::endBracket, lineCounter, columnCounter);
+	else throw std::runtime_error("Unable to match " + oneSymbol + " with a token type");
 }

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <utility>
+#include <queue>
 #include "Token.h"
 
 enum class MatchType {
@@ -22,9 +23,9 @@ private:
 	std::string matchInteger(std::string const& program) const;
 	std::pair<MatchType, std::string> findLongestMatch(std::string const& program) const;
 	Token resolveIdentifier(std::string const& identifier) const;
-	Token resolveInteger(std::string const& integer) const;
 	Token resolveOneSymbol(std::string const& oneSymbol) const;
 
 public:
-	void scanProgram(std::string& program);
+	Lexer();
+	std::queue<Token> scanProgram(std::string& program);
 };
