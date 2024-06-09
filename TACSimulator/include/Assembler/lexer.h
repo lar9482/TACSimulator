@@ -14,6 +14,7 @@ enum class MatchType {
 
 class Lexer {;
 private:
+
 	int lineCounter;
 	int columnCounter;
 

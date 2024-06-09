@@ -45,31 +45,27 @@ queue<Token> Lexer::scanProgram(string& program) {
 pair<MatchType, string> Lexer::findLongestMatch(string const& program) const {
 	MatchType longestMatchType = MatchType::Identifier;
 	string longestMatch = matchIdentifer(program);
-	int longestMatchLength = static_cast<int>(longestMatch.size());
+	size_t longestMatchLength = longestMatch.size();
 
 	string possibleOneSymbolMatch = matchOneSymbol(program);
 	string possibleIntegerMatch = matchInteger(program);
 	string possibleWhitespaceMatch = matchWhitespace(program);
 
-	int oneSymbolMatchLength = static_cast<int>(possibleOneSymbolMatch.size());
-	int integerMatchLength = static_cast<int>(possibleIntegerMatch.size());
-	int whitespaceMatchLength = static_cast<int>(possibleWhitespaceMatch.size());
-
-	if (oneSymbolMatchLength > longestMatchLength) {
+	if (possibleOneSymbolMatch.size() > longestMatchLength) {
 		longestMatchType = MatchType::OneSymbol;
-		longestMatchLength = oneSymbolMatchLength;
+		longestMatchLength = possibleOneSymbolMatch.size();
 		longestMatch = possibleOneSymbolMatch;
 	}
 
-	if (integerMatchLength > longestMatchLength) {
+	if (possibleIntegerMatch.size() > longestMatchLength) {
 		longestMatchType = MatchType::Integer;
-		longestMatchLength = integerMatchLength;
+		longestMatchLength = possibleIntegerMatch.size();
 		longestMatch = possibleIntegerMatch;
 	}
 
-	if (whitespaceMatchLength > longestMatchLength) {
+	if (possibleWhitespaceMatch.size() > longestMatchLength) {
 		longestMatchType = MatchType::Whitespace;
-		longestMatchLength = whitespaceMatchLength;
+		longestMatchLength = possibleWhitespaceMatch.size();
 		longestMatch = possibleWhitespaceMatch;
 	}
 
