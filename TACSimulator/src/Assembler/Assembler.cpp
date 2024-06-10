@@ -8,7 +8,6 @@
 
 using std::string;
 using std::queue;
-using std::unique_ptr;
 
 void assembleFile(string const& filePath) {
 	string program = readProgramFromFile(filePath);
