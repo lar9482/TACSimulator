@@ -1,5 +1,5 @@
 #pragma once
-#include <memory>
+
 struct AssembledInst {
 public:
 	unsigned char byte1;
