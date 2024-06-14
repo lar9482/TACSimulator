@@ -29,6 +29,7 @@ queue<Token> Lexer::scanProgram(string& program) {
                     columnCounter = 1;
                     lineCounter++;
                 }
+
                 break;
             default:
                 throw std::runtime_error("Unable to match type");
