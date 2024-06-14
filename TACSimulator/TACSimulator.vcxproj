@@ -128,19 +128,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Assembler\Assembler.cpp" />
-    <ClCompile Include="src\Assembler\Inst\IInst.cpp" />
-    <ClCompile Include="src\Assembler\Inst\JInst.cpp" />
-    <ClCompile Include="src\Assembler\Inst\RInst.cpp" />
     <ClCompile Include="src\Assembler\Lexer.cpp" />
+    <ClCompile Include="src\Assembler\Parser.cpp" />
     <ClCompile Include="TACSimulator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Assembler\Assembler.h" />
-    <ClInclude Include="include\Assembler\Inst\IInst.h" />
+    <ClInclude Include="include\Assembler\Inst\ArithLog.h" />
+    <ClInclude Include="include\Assembler\Inst\ArithLogI.h" />
+    <ClInclude Include="include\Assembler\Inst\Branch.h" />
+    <ClInclude Include="include\Assembler\Inst\BranchZ.h" />
+    <ClInclude Include="include\Assembler\Inst\DivMult.h" />
     <ClInclude Include="include\Assembler\Inst\Inst.h" />
-    <ClInclude Include="include\Assembler\Inst\JInst.h" />
-    <ClInclude Include="include\Assembler\Inst\RInst.h" />
+    <ClInclude Include="include\Assembler\Inst\Jump.h" />
+    <ClInclude Include="include\Assembler\Inst\JumpR.h" />
+    <ClInclude Include="include\Assembler\Inst\LoadStore.h" />
+    <ClInclude Include="include\Assembler\Inst\Shift.h" />
+    <ClInclude Include="include\Assembler\Inst\ShiftV.h" />
     <ClInclude Include="include\Assembler\Lexer.h" />
+    <ClInclude Include="include\Assembler\Parser.h" />
     <ClInclude Include="include\Assembler\Token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

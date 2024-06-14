@@ -5,6 +5,7 @@
 #include <memory>
 #include "../Assembler/Assembler.h"
 #include "../Assembler/Lexer.h"
+#include "../Assembler/Parser.h"
 
 using std::string;
 using std::queue;
@@ -14,6 +15,8 @@ void assembleFile(string const& filePath) {
 	
 	Lexer lexer;
 	queue<Token> tokenQueue = lexer.scanProgram(program);
+	Parser parser(tokenQueue);
+	parser.parseProgram();
 }
 
 string readProgramFromFile(string const& filePath) {

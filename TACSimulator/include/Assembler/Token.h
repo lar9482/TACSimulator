@@ -29,7 +29,6 @@ enum class TokenType {
     r23_Reg,
     r24_Reg,
     r25_Reg,
-    r26_Reg,
     rSP_Reg, //Stack pointer register
     rFP_Reg, //Frame pointer register 
     rRET_Reg, //Return pointer register
@@ -103,14 +102,12 @@ enum class TokenType {
 };
 
 struct Token {
-private:
-    std::string lexeme;
     TokenType type;
+    std::string lexeme;
     int line;
     int column;
 
-public:
-    Token(std::string lexeme, TokenType type, int line, int column) :
+    Token(const std::string& lexeme, TokenType type, int line, int column) :
         lexeme(lexeme),
         type(type),
         line(line),

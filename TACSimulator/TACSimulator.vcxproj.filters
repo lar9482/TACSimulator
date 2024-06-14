@@ -24,13 +24,7 @@
     <ClCompile Include="src\Assembler\Assembler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\RInst.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\IInst.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\JInst.cpp">
+    <ClCompile Include="src\Assembler\Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,13 +41,37 @@
     <ClInclude Include="include\Assembler\Inst\Inst.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\RInst.h">
+    <ClInclude Include="include\Assembler\Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\IInst.h">
+    <ClInclude Include="include\Assembler\Inst\DivMult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\JInst.h">
+    <ClInclude Include="include\Assembler\Inst\ArithLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\Shift.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\ShiftV.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\JumpR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\ArithLogI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\Branch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\BranchZ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\LoadStore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\Jump.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
