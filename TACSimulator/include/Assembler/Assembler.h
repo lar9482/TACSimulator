@@ -6,6 +6,7 @@
 void assembleFile(std::string const& filePath);
 std::string readProgramFromFile(std::string const& filePath);
 
+
 class UnableToReadFromFileException : public std::exception
 {
 private:

@@ -9,6 +9,7 @@ using std::string;
 using std::pair;
 using std::queue;
 
+
 queue<Token> Lexer::scanProgram(string& program) {
     queue<Token> allTokens;
     

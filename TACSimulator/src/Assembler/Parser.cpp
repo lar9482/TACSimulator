@@ -7,6 +7,7 @@ Parser::Parser(std::queue<Token>& tokenQueue)
 	)
 {}
 
+
 void Parser::parseProgram() {
 	while (tokenQueue->size() > 0) {
 		switch (tokenQueue->front().type) {
