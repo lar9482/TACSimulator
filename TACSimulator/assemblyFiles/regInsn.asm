@@ -1,4 +1,4 @@
-main:
+
     movI r1, 1000 
     mov r2, r1
     add r3, r3, r1

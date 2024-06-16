@@ -1,20 +1,23 @@
 #include <stdexcept>
 #include "../Assembler/Parser.h"
 
+using std::queue;
+using std::unique_ptr;
+using std::make_unique;
+
 Parser::Parser(std::queue<Token>& tokenQueue)
 	: tokenQueue(std::move(tokenQueue))
 {}
 
-
 void Parser::parseProgram() {
+    queue<unique_ptr<Inst>> allInsts;
 	while (tokenQueue.size() > 0) {
 		switch (tokenQueue.front().type) {
             case TokenType::mov_Inst:
+                allInsts.push(make_unique<Move>(parseMove()));
                 break;
             case TokenType::add_Inst:
             case TokenType::sub_Inst:
-            case TokenType::mult_Inst:
-            case TokenType::div_Inst:
             case TokenType::and_Inst:
             case TokenType::or_Inst:
             case TokenType::xor_Inst:
@@ -22,6 +25,16 @@ void Parser::parseProgram() {
             case TokenType::nor_Inst:
             case TokenType::sllv_Inst:
             case TokenType::srav_Inst:
+                allInsts.push(make_unique<ArithLog>(parseArithLog()));
+                break;
+            case TokenType::mult_Inst:
+            case TokenType::div_Inst:
+                allInsts.push(make_unique<DivMult>(parseDivMult()));
+                break;
+            case TokenType::movI_Inst:
+                allInsts.push(make_unique<MoveI>(parseMoveI()));
+                break;
+            case TokenType::identifier:
                 break;
             default:
                 throw std::runtime_error("Unable to match an opcode");
