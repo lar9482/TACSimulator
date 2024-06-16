@@ -9,13 +9,40 @@ Parser::Parser(std::queue<Token>& tokenQueue)
 void Parser::parseProgram() {
 	while (tokenQueue.size() > 0) {
 		switch (tokenQueue.front().type) {
-            
+            case TokenType::mov_Inst:
+                break;
+            case TokenType::add_Inst:
+            case TokenType::sub_Inst:
+            case TokenType::mult_Inst:
+            case TokenType::div_Inst:
+            case TokenType::and_Inst:
+            case TokenType::or_Inst:
+            case TokenType::xor_Inst:
+            case TokenType::not_Inst:
+            case TokenType::nor_Inst:
+            case TokenType::sllv_Inst:
+            case TokenType::srav_Inst:
+                break;
+            default:
+                throw std::runtime_error("Unable to match an opcode");
 		}
 	}
 }
 
-void Parser::parseArithLog() {
+/*
+ * Parsing instructions in the form:
+ * opcode reg1, reg2, reg3
+ */
+ArithLog Parser::parseArithLog() {
+    Token opcode = consume(tokenQueue.front().type);
 
+    Token reg1 = parseReg();
+    consume(TokenType::comma);
+    Token reg2 = parseReg();
+    consume(TokenType::comma);
+    Token reg3 = parseReg();
+
+    return ArithLog(opcode, reg1, reg2, reg3);
 }
 
 void Parser::parseDivMult() {
