@@ -44,34 +44,40 @@
     <ClInclude Include="include\Assembler\Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\DivMult.h">
+    <ClInclude Include="include\Assembler\Inst\Register\DivMult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\ArithLog.h">
+    <ClInclude Include="include\Assembler\Inst\Register\ArithLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Shift.h">
+    <ClInclude Include="include\Assembler\Inst\Register\Shift.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\ShiftV.h">
+    <ClInclude Include="include\Assembler\Inst\Register\ShiftV.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\JumpR.h">
+    <ClInclude Include="include\Assembler\Inst\Jump\JumpR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\ArithLogI.h">
+    <ClInclude Include="include\Assembler\Inst\Immediate\ArithLogI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Branch.h">
+    <ClInclude Include="include\Assembler\Inst\Immediate\Branch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\BranchZ.h">
+    <ClInclude Include="include\Assembler\Inst\Immediate\BranchZ.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\LoadStore.h">
+    <ClInclude Include="include\Assembler\Inst\Immediate\LoadStore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Jump.h">
+    <ClInclude Include="include\Assembler\Inst\Jump\Jump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\Move\Move.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\Move\MoveI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

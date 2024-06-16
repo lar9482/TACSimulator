@@ -134,17 +134,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Assembler\Assembler.h" />
-    <ClInclude Include="include\Assembler\Inst\ArithLog.h" />
-    <ClInclude Include="include\Assembler\Inst\ArithLogI.h" />
-    <ClInclude Include="include\Assembler\Inst\Branch.h" />
-    <ClInclude Include="include\Assembler\Inst\BranchZ.h" />
-    <ClInclude Include="include\Assembler\Inst\DivMult.h" />
+    <ClInclude Include="include\Assembler\Inst\Register\ArithLog.h" />
+    <ClInclude Include="include\Assembler\Inst\Immediate\ArithLogI.h" />
+    <ClInclude Include="include\Assembler\Inst\Immediate\Branch.h" />
+    <ClInclude Include="include\Assembler\Inst\Immediate\BranchZ.h" />
+    <ClInclude Include="include\Assembler\Inst\Register\DivMult.h" />
     <ClInclude Include="include\Assembler\Inst\Inst.h" />
-    <ClInclude Include="include\Assembler\Inst\Jump.h" />
-    <ClInclude Include="include\Assembler\Inst\JumpR.h" />
-    <ClInclude Include="include\Assembler\Inst\LoadStore.h" />
-    <ClInclude Include="include\Assembler\Inst\Shift.h" />
-    <ClInclude Include="include\Assembler\Inst\ShiftV.h" />
+    <ClInclude Include="include\Assembler\Inst\Jump\Jump.h" />
+    <ClInclude Include="include\Assembler\Inst\Jump\JumpR.h" />
+    <ClInclude Include="include\Assembler\Inst\Immediate\LoadStore.h" />
+    <ClInclude Include="include\Assembler\Inst\Move\Move.h" />
+    <ClInclude Include="include\Assembler\Inst\Move\MoveI.h" />
+    <ClInclude Include="include\Assembler\Inst\Register\Shift.h" />
+    <ClInclude Include="include\Assembler\Inst\Register\ShiftV.h" />
     <ClInclude Include="include\Assembler\Lexer.h" />
     <ClInclude Include="include\Assembler\Parser.h" />
     <ClInclude Include="include\Assembler\Token.h" />

@@ -1,8 +1,6 @@
 #pragma once
 
-
 struct AssembledInst {
-public:
 	unsigned char byte1;
 	unsigned char byte2;
 	unsigned char byte3;
