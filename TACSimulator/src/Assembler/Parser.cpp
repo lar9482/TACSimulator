@@ -2,62 +2,67 @@
 #include "../Assembler/Parser.h"
 
 Parser::Parser(std::queue<Token>& tokenQueue)
-	: tokenQueue(
-		std::make_unique<std::queue<Token>>(std::move(tokenQueue))
-	)
+	: tokenQueue(std::move(tokenQueue))
 {}
 
 
 void Parser::parseProgram() {
-	while (tokenQueue->size() > 0) {
-		switch (tokenQueue->front().type) {
-            case TokenType::mov_Inst:
-            case TokenType::add_Inst:
-            case TokenType::sub_Inst:
-            case TokenType::mult_Inst:
-            case TokenType::div_Inst:
-            case TokenType::and_Inst:
-            case TokenType::or_Inst:
-            case TokenType::xor_Inst:
-            case TokenType::not_Inst:
-            case TokenType::nor_Inst:
-            case TokenType::sllv_Inst:
-            case TokenType::srav_Inst:
-                parseRInst();
-                break;
-            case TokenType::identifier:
-                parseLabel();
-                break;
+	while (tokenQueue.size() > 0) {
+		switch (tokenQueue.front().type) {
+            
 		}
 	}
 }
 
-void Parser::parseRInst() {
-    Token opToken = consume(tokenQueue->front().type);
-    Token reg1Token = parseReg();
-    consume(TokenType::comma);
-    Token reg2Token = parseReg();
-    consume(TokenType::comma);
-    Token reg3Token = parseReg();
-}
-
-void Parser::parseJInst() {
+void Parser::parseArithLog() {
 
 }
 
-//Immediate instructions(opcode reg, reg, integer)
-void Parser::parseIInst() {
+void Parser::parseDivMult() {
 
 }
 
-void Parser::parseLabel() {
-    Token labelToken = consume(TokenType::identifier);
-    consume(TokenType::colon);
+void Parser::parseShift() {
+
+}
+
+void Parser::parseShiftV() {
+
+}
+
+void Parser::parseBranch() {
+
+}
+
+void Parser::parseBranchZ() {
+
+}
+
+void Parser::parseArithLogI() {
+
+}
+void Parser::parseLoadStore() {
+
+}
+void Parser::parseJump() {
+
+}
+
+void Parser::parseJumpR() {
+
+}
+
+void Parser::parseMove() {
+
+}
+
+void Parser::parseMoveI() {
+
 }
 
 //Register instructions(opcode reg, reg, reg)
 Token Parser::parseReg() {
-    switch (tokenQueue->front().type) {
+    switch (tokenQueue.front().type) {
         case TokenType::r0_Reg:
         case TokenType::r1_Reg:
         case TokenType::r2_Reg:
@@ -90,16 +95,16 @@ Token Parser::parseReg() {
         case TokenType::rHI_Reg:
         case TokenType::rLO_Reg:
         case TokenType::rIP_Reg:
-            return consume(tokenQueue->front().type);
+            return consume(tokenQueue.front().type);
         default:
             throw std::runtime_error("Unable to match the register.");
     }
 }
 
 Token Parser::consume(const TokenType& type) {
-    if (tokenQueue->front().type == type) {
-        Token currToken = tokenQueue->front();
-        tokenQueue->pop();
+    if (tokenQueue.front().type == type) {
+        Token currToken = tokenQueue.front();
+        tokenQueue.pop();
 
         return currToken;
     }

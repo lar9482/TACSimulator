@@ -7,11 +7,21 @@
 
 class Parser {
 private:
-	std::unique_ptr<std::queue<Token>> tokenQueue;
-	void parseRInst();
-	void parseJInst();
-	void parseIInst();
-	void parseLabel();
+	std::queue<Token> tokenQueue;
+
+	void parseArithLog();
+	void parseDivMult();
+	void parseShift();
+	void parseShiftV();
+	void parseBranch();
+	void parseBranchZ();
+	void parseArithLogI();
+	void parseLoadStore();
+	void parseJump();
+	void parseJumpR();
+	void parseMove();
+	void parseMoveI();
+
 	Token parseReg();
 	Token consume(TokenType const& type);
 public:
