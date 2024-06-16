@@ -20,17 +20,17 @@ private:
 	std::queue<Token> tokenQueue;
 
 	ArithLog parseArithLog();
-	void parseDivMult();
-	void parseShift();
-	void parseShiftV();
-	void parseBranch();
-	void parseBranchZ();
-	void parseArithLogI();
-	void parseLoadStore();
-	void parseJump();
-	void parseJumpR();
-	void parseMove();
-	void parseMoveI();
+	DivMult parseDivMult();
+	Shift parseShift();
+	ShiftV parseShiftV();
+	Branch parseBranch();
+	BranchZ parseBranchZ();
+	ArithLogI parseArithLogI();
+	LoadStore parseLoadStore();
+	Jump parseJump();
+	JumpR parseJumpR();
+	Move parseMove();
+	MoveI parseMoveI();
 
 	Token parseReg();
 	Token consume(TokenType const& type);

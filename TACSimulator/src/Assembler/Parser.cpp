@@ -45,46 +45,160 @@ ArithLog Parser::parseArithLog() {
     return ArithLog(opcode, reg1, reg2, reg3);
 }
 
-void Parser::parseDivMult() {
+/*
+ * Parsing instructions in the form:
+ * opcode reg1, reg2
+ */
+DivMult Parser::parseDivMult() {
+    Token opcode = consume(tokenQueue.front().type);
 
+    Token reg1 = parseReg();
+    consume(TokenType::comma);
+    Token reg2 = parseReg();
+
+    return DivMult(opcode, reg1, reg2);
 }
 
-void Parser::parseShift() {
+/*
+ * Parsing instructions in the form:
+ * opcode reg1, reg2, integer
+ */
+Shift Parser::parseShift() {
+    Token opcode = consume(tokenQueue.front().type);
 
+    Token reg1 = parseReg();
+    consume(TokenType::comma);
+    Token reg2 = parseReg();
+    consume(TokenType::comma);
+    Token integer = consume(TokenType::integer);
+
+    return Shift(opcode, reg1, reg2, integer);
 }
 
-void Parser::parseShiftV() {
+/*
+ * Parsing instructions in the form:
+ * opcode reg1, reg2, reg3
+ */
+ShiftV Parser::parseShiftV() {
+    Token opcode = consume(tokenQueue.front().type);
 
+    Token reg1 = parseReg();
+    consume(TokenType::comma);
+    Token reg2 = parseReg();
+    consume(TokenType::comma);
+    Token reg3 = parseReg();
+
+    return ShiftV(opcode, reg1, reg2, reg3);
 }
 
-void Parser::parseBranch() {
+/*
+ * Parsing instructions in the form:
+ * opcode reg1, reg2, label
+ */
+Branch Parser::parseBranch() {
+    Token opcode = consume(tokenQueue.front().type);
 
+    Token reg1 = parseReg();
+    consume(TokenType::comma);
+    Token reg2 = parseReg();
+    consume(TokenType::comma);
+    Token label = consume(TokenType::identifier);
+
+    return Branch(opcode, reg1, reg2, label);
 }
 
-void Parser::parseBranchZ() {
+/*
+ * Parsing instructions in the form:
+ * opcode reg, label
+ */
+BranchZ Parser::parseBranchZ() {
+    Token opcode = consume(tokenQueue.front().type);
+    Token reg = parseReg();
+    consume(TokenType::comma);
+    Token label = consume(TokenType::identifier);
 
+    return BranchZ(opcode, reg, label);
 }
 
-void Parser::parseArithLogI() {
+/*
+ * Parsing instructions in the form:
+ * opcode reg1, reg2, integer
+ */
+ArithLogI Parser::parseArithLogI() {
+    Token opcode = consume(tokenQueue.front().type);
 
-}
-void Parser::parseLoadStore() {
+    Token reg1 = parseReg();
+    consume(TokenType::comma);
+    Token reg2 = parseReg();
+    consume(TokenType::comma);
+    Token integer = consume(TokenType::integer);
 
-}
-void Parser::parseJump() {
-
-}
-
-void Parser::parseJumpR() {
-
-}
-
-void Parser::parseMove() {
-
+    return ArithLogI(opcode, reg1, reg2, integer);
 }
 
-void Parser::parseMoveI() {
+/*
+ * Parsing instructions in the form:
+ * opcode reg1, integer[reg2]
+ */
+LoadStore Parser::parseLoadStore() {
+    Token opcode = consume(tokenQueue.front().type);
 
+    Token reg1 = parseReg();
+    consume(TokenType::comma);
+    Token offset = consume(TokenType::integer);
+    consume(TokenType::startBracket);
+    Token reg2 = parseReg();
+    consume(TokenType::endBracket);
+
+    return LoadStore(opcode, reg1, offset, reg2);
+}
+
+/*
+ * Parsing instructions in the form:
+ * opcode label
+ */
+Jump Parser::parseJump() {
+    Token opcode = consume(tokenQueue.front().type);
+    Token label = consume(TokenType::identifier);
+
+    return Jump(opcode, label);
+}
+
+/*
+ * Parsing instructions in the form:
+ * opcode reg
+ */
+JumpR Parser::parseJumpR() {
+    Token opcode = consume(tokenQueue.front().type);
+    Token reg = parseReg();
+
+    return JumpR(opcode, reg);
+}
+
+/*
+ * Parsing instructions in the form:
+ * opcode reg1, reg2
+ */
+Move Parser::parseMove() {
+    Token opcode = consume(tokenQueue.front().type);
+    Token reg1 = parseReg();
+    consume(TokenType::comma);
+    Token reg2 = parseReg();
+
+    return Move(opcode, reg1, reg2);
+}
+
+/*
+ * Parsing instructions in the form:
+ * opcode reg, integer
+ */
+MoveI Parser::parseMoveI() {
+    Token opcode = consume(tokenQueue.front().type);
+    Token reg = parseReg();
+    consume(TokenType::comma);
+    Token integer = consume(TokenType::integer);
+
+    return MoveI(opcode, reg, integer);
 }
 
 //Register instructions(opcode reg, reg, reg)
