@@ -5,10 +5,10 @@
 
 class MoveI : public Inst {
     Token opcode;
-    Token reg1;
+    Token reg;
     Token integer;
 
 public:
-    MoveI(Token opcode, Token reg1, Token integer);
+    MoveI(Token opcode, Token reg, Token integer);
     AssembledInst assembleInst() const override;
 };

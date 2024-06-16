@@ -18,6 +18,7 @@ struct AssembledInst {
 };
 
 class Inst {
+
 public:
 	virtual AssembledInst assembleInst() const = 0;
 	virtual ~Inst() = default;

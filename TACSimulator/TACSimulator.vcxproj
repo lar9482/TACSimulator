@@ -150,6 +150,18 @@
     <ClInclude Include="include\Assembler\Lexer.h" />
     <ClInclude Include="include\Assembler\Parser.h" />
     <ClInclude Include="include\Assembler\Token.h" />
+    <ClInclude Include="src\Assembler\Inst\Immediate\ArithLogI.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Immediate\Branch.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Immediate\BranchZ.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Immediate\LoadStore.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Jump\Jump.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Jump\JumpR.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Move\Move.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Move\MoveI.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Register\ArithLog.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Register\DivMult.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Register\Shift.cpp" />
+    <ClInclude Include="src\Assembler\Inst\Register\ShiftV.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

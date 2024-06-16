@@ -80,5 +80,41 @@
     <ClInclude Include="include\Assembler\Inst\Move\MoveI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Register\ArithLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Immediate\ArithLogI.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Immediate\Branch.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Immediate\BranchZ.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Register\DivMult.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Immediate\LoadStore.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Register\Shift.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Register\ShiftV.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Jump\Jump.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Jump\JumpR.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Move\Move.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Assembler\Inst\Move\MoveI.cpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
