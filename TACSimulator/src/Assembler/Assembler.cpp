@@ -10,6 +10,7 @@
 
 using std::string;
 using std::queue;
+using std::unique_ptr;
 
 void assembleFile(string const& filePath) {
 	string program = readProgramFromFile(filePath);
@@ -17,7 +18,13 @@ void assembleFile(string const& filePath) {
 	Lexer lexer;
 	queue<Token> tokenQueue = lexer.scanProgram(program);
 	Parser parser(tokenQueue);
-	parser.parseProgram();
+	queue<unique_ptr<Inst>> allInsts = parser.parseProgram();
+
+	while (allInsts.size() > 0) {
+		auto inst = allInsts.front().get();
+		inst->assembleInst();
+		allInsts.pop();
+	}
 }
 
 string readProgramFromFile(string const& filePath) {

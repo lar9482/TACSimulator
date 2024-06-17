@@ -1,11 +1,11 @@
-
+main:
     movI r1, 1000 
     mov r2, r1
     add r3, r3, r1
     sub r4, r4, r1
 
     movI r5, 2500
-    div r5, r1
+    div r5, r5, r1
 
     movI r6, 500
     movI r7, 500

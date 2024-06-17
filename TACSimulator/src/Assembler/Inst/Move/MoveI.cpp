@@ -6,6 +6,7 @@ MoveI::MoveI(Token opcode, Token reg, Token integer) :
     integer(integer) {}
 
 AssembledInst MoveI::assembleInst() const {
+    assembleOpcode(opcode);
     AssembledInst inst(0x1, 0x1, 0x1, 0x1);
     return inst;
 }

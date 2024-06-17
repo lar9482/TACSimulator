@@ -9,15 +9,16 @@ Parser::Parser(std::queue<Token>& tokenQueue)
 	: tokenQueue(std::move(tokenQueue))
 {}
 
-void Parser::parseProgram() {
+queue<unique_ptr<Inst>> Parser::parseProgram() {
     queue<unique_ptr<Inst>> allInsts;
 	while (tokenQueue.size() > 0) {
 		switch (tokenQueue.front().type) {
             case TokenType::mov_Inst:
-                allInsts.push(make_unique<Move>(parseMove()));
-                break;
+                allInsts.push(make_unique<Move>(parseMove())); break;
             case TokenType::add_Inst:
             case TokenType::sub_Inst:
+            case TokenType::mult_Inst:
+            case TokenType::div_Inst:
             case TokenType::and_Inst:
             case TokenType::or_Inst:
             case TokenType::xor_Inst:
@@ -25,21 +26,28 @@ void Parser::parseProgram() {
             case TokenType::nor_Inst:
             case TokenType::sllv_Inst:
             case TokenType::srav_Inst:
-                allInsts.push(make_unique<ArithLog>(parseArithLog()));
-                break;
-            case TokenType::mult_Inst:
-            case TokenType::div_Inst:
-                allInsts.push(make_unique<DivMult>(parseDivMult()));
-                break;
+                allInsts.push(make_unique<ArithLog>(parseArithLog())); break;
             case TokenType::movI_Inst:
-                allInsts.push(make_unique<MoveI>(parseMoveI()));
-                break;
+                allInsts.push(make_unique<MoveI>(parseMoveI())); break;
+            case TokenType::addI_Inst:
+            case TokenType::subI_Inst:
+            case TokenType::multI_Inst:
+            case TokenType::divI_Inst:
+            case TokenType::orI_Inst:
+            case TokenType::xorI_Inst:
+            case TokenType::notI_Inst:
+            case TokenType::norI_Inst:
+            case TokenType::sll_Inst:
+            case TokenType::sra_Inst:
+                allInsts.push(make_unique<ArithLogI>(parseArithLogI())); break;
             case TokenType::identifier:
-                break;
+                allInsts.push(make_unique<Label>(parseLabel())); break;
             default:
                 throw std::runtime_error("Unable to match an opcode");
 		}
 	}
+
+    return allInsts;
 }
 
 /*
@@ -56,20 +64,6 @@ ArithLog Parser::parseArithLog() {
     Token reg3 = parseReg();
 
     return ArithLog(opcode, reg1, reg2, reg3);
-}
-
-/*
- * Parsing instructions in the form:
- * opcode reg1, reg2
- */
-DivMult Parser::parseDivMult() {
-    Token opcode = consume(tokenQueue.front().type);
-
-    Token reg1 = parseReg();
-    consume(TokenType::comma);
-    Token reg2 = parseReg();
-
-    return DivMult(opcode, reg1, reg2);
 }
 
 /*
@@ -212,6 +206,17 @@ MoveI Parser::parseMoveI() {
     Token integer = consume(TokenType::integer);
 
     return MoveI(opcode, reg, integer);
+}
+
+/*
+ * Parsing instructions in the form:
+ * identifier:
+ */
+Label Parser::parseLabel() {
+    Token label = consume(TokenType::identifier);
+    consume(TokenType::colon);
+
+    return Label(label);
 }
 
 //Register instructions(opcode reg, reg, reg)

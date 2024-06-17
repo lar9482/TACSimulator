@@ -27,9 +27,6 @@
     <ClCompile Include="src\Assembler\Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Register\DivMult.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Assembler\Inst\Register\Shift.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,6 +60,12 @@
     <ClCompile Include="src\Assembler\Inst\Move\MoveI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Assembler\Inst\Label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Assembler\Inst\Inst.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Assembler\Lexer.h">
@@ -78,9 +81,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Assembler\Parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Register\DivMult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Assembler\Inst\Register\ArithLog.h">
@@ -114,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Assembler\Inst\Move\MoveI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Assembler\Inst\Label.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

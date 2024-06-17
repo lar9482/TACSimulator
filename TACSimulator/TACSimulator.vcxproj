@@ -128,6 +128,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Assembler\Assembler.cpp" />
+    <ClCompile Include="src\Assembler\Inst\Inst.cpp" />
+    <ClCompile Include="src\Assembler\Inst\Label.cpp" />
     <ClCompile Include="src\Assembler\Inst\Register\ArithLog.cpp" />
     <ClCompile Include="src\Assembler\Lexer.cpp" />
     <ClCompile Include="src\Assembler\Parser.cpp" />
@@ -135,11 +137,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Assembler\Assembler.h" />
+    <ClInclude Include="include\Assembler\Inst\Label.h" />
     <ClInclude Include="include\Assembler\Inst\Register\ArithLog.h" />
     <ClInclude Include="include\Assembler\Inst\Immediate\ArithLogI.h" />
     <ClInclude Include="include\Assembler\Inst\Immediate\Branch.h" />
     <ClInclude Include="include\Assembler\Inst\Immediate\BranchZ.h" />
-    <ClInclude Include="include\Assembler\Inst\Register\DivMult.h" />
     <ClInclude Include="include\Assembler\Inst\Inst.h" />
     <ClInclude Include="include\Assembler\Inst\Jump\Jump.h" />
     <ClInclude Include="include\Assembler\Inst\Jump\JumpR.h" />
@@ -159,7 +161,6 @@
     <ClCompile Include="src\Assembler\Inst\Jump\JumpR.cpp" />
     <ClCompile Include="src\Assembler\Inst\Move\Move.cpp" />
     <ClCompile Include="src\Assembler\Inst\Move\MoveI.cpp" />
-    <ClCompile Include="src\Assembler\Inst\Register\DivMult.cpp" />
     <ClCompile Include="src\Assembler\Inst\Register\Shift.cpp" />
     <ClCompile Include="src\Assembler\Inst\Register\ShiftV.cpp" />
   </ItemGroup>
