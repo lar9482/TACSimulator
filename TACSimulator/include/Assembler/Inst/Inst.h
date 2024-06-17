@@ -3,6 +3,13 @@
 #include <memory>
 #include "../Assembler/Token.h"
 
+/*
+ * This will ultimately be assembled as follows:
+ * 11111111 22222222 33333333 44444444
+ * 
+ * where byte1 represents the most significant byte,
+ * and byte4 represents the least significant byte.
+ */
 struct AssembledInst {
 	unsigned char byte1;
 	unsigned char byte2;
@@ -28,8 +35,8 @@ protected:
 	Inst(Inst&&) = default;
 	Inst& operator=(Inst&&) = default;
 
-	void assembleOpcode(const Token& opcode) const;
-	void assembleRegister(const Token& opcode) const;
+	uint8_t assembleOpcode(const Token& opcode) const;
+	uint8_t assembleRegister(const Token& reg) const;
 
 public:
 	virtual std::unique_ptr<Inst> clone() const = 0;
