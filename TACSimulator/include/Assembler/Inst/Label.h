@@ -8,7 +8,7 @@ private:
     Token label;
 
 public:
-    Label(Token label);
+    Label(Token& opcode, Token& label);
     AssembledInst assembleInst() const override;
 
     std::unique_ptr<Inst> clone() const override {

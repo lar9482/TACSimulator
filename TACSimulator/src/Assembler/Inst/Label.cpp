@@ -1,6 +1,7 @@
 #include "../Assembler/Inst/Label.h"
 
-Label::Label(Token label) : 
+Label::Label(Token& opcode, Token& label) :
+    Inst(opcode),
     label(label) {}
 
 AssembledInst Label::assembleInst() const {

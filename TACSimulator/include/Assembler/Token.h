@@ -84,6 +84,7 @@ enum class TokenType {
     lw_Inst,
     sb_Inst,
     sw_Inst,
+    label_Inst,
 
     //Interrupt instructions
     halt_Inst,

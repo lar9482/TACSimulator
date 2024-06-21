@@ -5,13 +5,12 @@
 
 class ShiftV : public Inst {
 private:
-    Token opcode;
     Token reg1;
     Token reg2;
     Token reg3;
 
 public:
-    ShiftV(Token opcode, Token reg1, Token reg2, Token reg3);
+    ShiftV(Token& opcode, Token& reg1, Token& reg2, Token& reg3);
     AssembledInst assembleInst() const override;
 
     std::unique_ptr<Inst> clone() const override {

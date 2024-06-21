@@ -43,6 +43,7 @@ uint8_t Inst::assembleOpcode(const Token& opcode) const {
         case TokenType::sb_Inst:       return 0b100100;
         case TokenType::sw_Inst:       return 0b100101;
         case TokenType::halt_Inst:     return 0b100110;
+        case TokenType::label_Inst:    return 0b100111;
         default:
             throw std::runtime_error("Unable to match the token type to an opcode");
     }

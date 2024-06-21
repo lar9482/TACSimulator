@@ -1,7 +1,7 @@
 #include "../Assembler/Inst/Jump/Jump.h"
 
-Jump::Jump(Token opcode, Token label) :
-    opcode(opcode),
+Jump::Jump(Token& opcode, Token& label) :
+    Inst(opcode),
     label(label) {}
 
 AssembledInst Jump::assembleInst() const {

@@ -5,11 +5,10 @@
 
 class JumpR : public Inst {
 private:
-    Token opcode;
     Token reg;
 
 public:
-    JumpR(Token opcode, Token reg);
+    JumpR(Token& opcode, Token& reg);
     AssembledInst assembleInst() const override;
 
     std::unique_ptr<Inst> clone() const override {

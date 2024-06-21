@@ -1,7 +1,7 @@
 #include "../Assembler/Inst/Immediate/BranchZ.h"
 
-BranchZ::BranchZ(Token opcode, Token reg, Token label) :
-    opcode(opcode),
+BranchZ::BranchZ(Token& opcode, Token& reg, Token& label) :
+    Inst(opcode),
     reg(reg),
     label(label) {}
 

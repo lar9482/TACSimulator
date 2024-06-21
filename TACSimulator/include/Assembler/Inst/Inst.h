@@ -28,8 +28,14 @@ struct AssembledInst {
 };
 
 class Inst {
+private:
+	Token opcode;
+
 protected:
-	Inst() = default;
+
+	Inst(Token& opcode)
+		: opcode(opcode)
+	{}
 	Inst(const Inst&) = default;
 	Inst& operator=(const Inst&) = default;
 	Inst(Inst&&) = default;
@@ -42,4 +48,8 @@ public:
 	virtual std::unique_ptr<Inst> clone() const = 0;
 	virtual AssembledInst assembleInst() const = 0;
 	virtual ~Inst() = default;
+
+	Token getOpcode() const{
+		return opcode;
+	}
 };

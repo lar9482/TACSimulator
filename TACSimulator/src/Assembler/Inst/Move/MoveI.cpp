@@ -1,7 +1,7 @@
 #include "../Assembler/Inst/Move/MoveI.h"
 
-MoveI::MoveI(Token opcode, Token reg, Token integer) :
-    opcode(opcode),
+MoveI::MoveI(Token& opcode, Token& reg, Token& integer) :
+    Inst(opcode),
     reg(reg),
     integer(integer) {}
 

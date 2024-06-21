@@ -214,9 +214,13 @@ MoveI Parser::parseMoveI() {
  */
 Label Parser::parseLabel() {
     Token label = consume(TokenType::identifier);
+    Token labelInst = Token("label", TokenType::label_Inst, label.line, label.column);
     consume(TokenType::colon);
 
-    return Label(label);
+    return Label(
+        labelInst,
+        label
+    );
 }
 
 //Register instructions(opcode reg, reg, reg)

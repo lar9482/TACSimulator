@@ -1,7 +1,7 @@
 #include "../Assembler/Inst/Move/Move.h"
 
-Move::Move(Token opcode, Token reg1, Token reg2) :
-    opcode(opcode),
+Move::Move(Token& opcode, Token& reg1, Token& reg2) :
+    Inst(opcode),
     reg1(reg1),
     reg2(reg2) {}
 

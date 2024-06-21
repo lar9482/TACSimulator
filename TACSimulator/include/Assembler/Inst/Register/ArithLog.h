@@ -6,13 +6,12 @@
 class ArithLog : public Inst {
 
 private:
-    Token opcode;
     Token reg1;
     Token reg2;
     Token reg3;
 
 public:
-    ArithLog(Token opcode, Token reg1, Token reg2, Token reg3);
+    ArithLog(Token& opcode, Token& reg1, Token& reg2, Token& reg3);
     AssembledInst assembleInst() const override;
 
     std::unique_ptr<Inst> clone() const override {

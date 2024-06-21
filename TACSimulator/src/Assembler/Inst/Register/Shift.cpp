@@ -1,7 +1,7 @@
 #include "../Assembler/Inst/Register/Shift.h"
 
-Shift::Shift(Token opcode, Token reg1, Token reg2, Token integer) :
-    opcode(opcode),
+Shift::Shift(Token& opcode, Token& reg1, Token& reg2, Token& integer) :
+    Inst(opcode),
     reg1(reg1),
     reg2(reg2),
     integer(integer) {}
