@@ -27,43 +27,7 @@
     <ClCompile Include="src\Assembler\Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Register\Shift.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Register\ShiftV.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Register\ArithLog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Immediate\ArithLogI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Immediate\Branch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Immediate\BranchZ.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Immediate\LoadStore.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Jump\Jump.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Jump\JumpR.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Move\Move.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Move\MoveI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Label.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Assembler\Inst\Inst.cpp">
+    <ClCompile Include="src\Assembler\Inst.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,46 +41,10 @@
     <ClInclude Include="include\Assembler\Assembler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Inst.h">
+    <ClInclude Include="include\Assembler\Inst.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Assembler\Parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Register\ArithLog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Register\Shift.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Register\ShiftV.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Jump\JumpR.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Immediate\ArithLogI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Immediate\Branch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Immediate\BranchZ.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Immediate\LoadStore.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Jump\Jump.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Move\Move.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Move\MoveI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Assembler\Inst\Label.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

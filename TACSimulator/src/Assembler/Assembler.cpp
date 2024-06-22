@@ -7,7 +7,6 @@
 #include "../Assembler/Lexer.h"
 #include "../Assembler/Parser.h"
 
-
 using std::string;
 using std::queue;
 using std::unique_ptr;
@@ -22,7 +21,7 @@ void assembleFile(string const& filePath) {
 
 	while (allInsts.size() > 0) {
 		auto inst = allInsts.front().get();
-		inst->assembleInst();
+		// inst->assembleInst();
 		allInsts.pop();
 	}
 }
