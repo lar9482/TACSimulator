@@ -181,11 +181,11 @@ Token Lexer::resolveIdentifier(string const& identifier) const {
     else if (identifier == "r23") return Token(identifier, TokenType::r23_Reg, lineCounter, columnCounter);
     else if (identifier == "r24") return Token(identifier, TokenType::r24_Reg, lineCounter, columnCounter);
     else if (identifier == "r25") return Token(identifier, TokenType::r25_Reg, lineCounter, columnCounter);
+    else if (identifier == "r26") return Token(identifier, TokenType::r26_Reg, lineCounter, columnCounter);
+    else if (identifier == "r27") return Token(identifier, TokenType::r27_Reg, lineCounter, columnCounter);
     else if (identifier == "rSP") return Token(identifier, TokenType::rSP_Reg, lineCounter, columnCounter);
     else if (identifier == "rFP") return Token(identifier, TokenType::rFP_Reg, lineCounter, columnCounter);
     else if (identifier == "rRET") return Token(identifier, TokenType::rRET_Reg, lineCounter, columnCounter);
-    else if (identifier == "rHI") return Token(identifier, TokenType::rHI_Reg, lineCounter, columnCounter);
-    else if (identifier == "rLO") return Token(identifier, TokenType::rLO_Reg, lineCounter, columnCounter);
     else if (identifier == "rIP") return Token(identifier, TokenType::rIP_Reg, lineCounter, columnCounter);
     else if (identifier == "mov") return Token(identifier, TokenType::mov_Inst, lineCounter, columnCounter);
     else if (identifier == "add") return Token(identifier, TokenType::add_Inst, lineCounter, columnCounter);

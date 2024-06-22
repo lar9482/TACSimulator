@@ -120,11 +120,11 @@ uint8_t Assembler::assembleRegister(const Token& reg) const {
     case TokenType::r23_Reg:  return 0b10111;
     case TokenType::r24_Reg:  return 0b11000;
     case TokenType::r25_Reg:  return 0b11001;
-    case TokenType::rSP_Reg:  return 0b11010;
-    case TokenType::rFP_Reg:  return 0b11011;
-    case TokenType::rRET_Reg: return 0b11100;
-    case TokenType::rHI_Reg:  return 0b11101;
-    case TokenType::rLO_Reg:  return 0b11110;
+    case TokenType::r26_Reg:  return 0b11010;
+    case TokenType::r27_Reg:  return 0b11011;
+    case TokenType::rSP_Reg: return 0b11100;
+    case TokenType::rFP_Reg:  return 0b11101;
+    case TokenType::rRET_Reg:  return 0b11110;
     case TokenType::rIP_Reg:  return 0b11111;
     default:
         throw std::runtime_error("Unable to match the token type as a register");

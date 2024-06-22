@@ -30,11 +30,11 @@ enum class TokenType {
     r23_Reg,
     r24_Reg,
     r25_Reg,
+    r26_Reg,
+    r27_Reg,
     rSP_Reg, //Stack pointer register
     rFP_Reg, //Frame pointer register 
     rRET_Reg, //Return pointer register
-    rHI_Reg, //Holds truncated result from division
-    rLO_Reg, //Holds remainder from truncated result
     rIP_Reg, //The instruction pointer
 
     //Register instructions(opcode reg, reg, reg)
