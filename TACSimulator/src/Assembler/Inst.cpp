@@ -1,6 +1,5 @@
 #include "../Assembler/Inst.h"
 #include "../Assembler/Token.h"
-#include <stdexcept>
 
 ArithLogI::ArithLogI(Token& opcode, Token& reg1, Token& reg2, Token& integer) :
     Inst(opcode),

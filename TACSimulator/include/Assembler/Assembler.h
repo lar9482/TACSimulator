@@ -2,14 +2,19 @@
 
 #include <string>
 #include <exception>
+#include <memory>
+#include <queue>
+#include <unordered_map>
 #include "../Assembler/Inst.h"
 
 class Assembler : public InstVisitor {
 private:
+	std::unordered_map<std::string, uint8_t> labelAddresses;
+
 	std::string readProgramFromFile(const std::string& filePath);
 	uint8_t assembleOpcode(const Token& opcode) const;
 	uint8_t assembleRegister(const Token& reg) const;
-
+	void findLabelAddresses(std::queue<std::unique_ptr<Inst>>& allInsts);
 public:
 	void assembleFile(const std::string& filePath);
 	AssembledInst visit(const ArithLog& inst) const override;

@@ -11,18 +11,18 @@
  * and byte4 represents the least significant byte.
  */
 struct AssembledInst {
-	unsigned char byte1;
-	unsigned char byte2;
-	unsigned char byte3;
-	unsigned char byte4;
+	uint8_t byte1;
+	uint8_t byte2;
+	uint8_t byte3;
+	uint8_t byte4;
 
-	AssembledInst(unsigned char& byte1, unsigned char& byte2,
-		unsigned char& byte3, unsigned char& byte4
+	AssembledInst(uint8_t& byte1, uint8_t& byte2,
+		uint8_t& byte3, uint8_t& byte4
 	) : byte1(byte1), byte2(byte2),
 		byte3(byte3), byte4(byte4) {}
 
-	AssembledInst(unsigned char&& byte1, unsigned char&& byte2,
-		unsigned char&& byte3, unsigned char&& byte4
+	AssembledInst(uint8_t&& byte1, uint8_t&& byte2,
+		uint8_t&& byte3, uint8_t&& byte4
 	) : byte1(byte1), byte2(byte2),
 		byte3(byte3), byte4(byte4) {}
 };

@@ -3,9 +3,11 @@
 #include <sstream>
 #include <queue>
 #include <memory>
+
 #include "../Assembler/Assembler.h"
 #include "../Assembler/Lexer.h"
 #include "../Assembler/Parser.h"
+#include "../Assembler/Inst.h"
 
 using std::string;
 using std::queue;
@@ -18,6 +20,8 @@ void Assembler::assembleFile(const string& filePath) {
 	queue<Token> tokenQueue = lexer.scanProgram(program);
 	Parser parser(tokenQueue);
 	queue<unique_ptr<Inst>> allInsts = parser.parseProgram();
+
+    findLabelAddresses(allInsts);
 
 	while (allInsts.size() > 0) {
 		auto inst = allInsts.front().get();
@@ -124,6 +128,26 @@ uint8_t Assembler::assembleRegister(const Token& reg) const {
     case TokenType::rIP_Reg:  return 0b11111;
     default:
         throw std::runtime_error("Unable to match the token type as a register");
+    }
+}
+
+void Assembler::findLabelAddresses(std::queue<std::unique_ptr<Inst>>& allInsts) {
+    size_t originalSize = allInsts.size();
+    uint8_t addressCounter = 0;
+    while (originalSize > 0) {
+        unique_ptr<Inst> inst = std::move(allInsts.front());
+        allInsts.pop();
+
+        if (inst->getOpcode().type == TokenType::label_Inst) {
+            Label* labelInst = static_cast<Label*>(inst.get());
+            Token labelToken = labelInst->getLabel();
+
+            labelAddresses[labelToken.lexeme] = addressCounter;
+            addressCounter += 4;
+        }
+
+        allInsts.push(std::move(inst));
+        originalSize--;
     }
 }
 
