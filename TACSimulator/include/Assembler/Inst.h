@@ -78,17 +78,12 @@ protected:
 	Inst(Inst&&) = default;
 	Inst& operator=(Inst&&) = default;
 
-	uint8_t assembleOpcode(const Token& opcode) const;
-	uint8_t assembleRegister(const Token& reg) const;
-
 public:
 	virtual std::unique_ptr<Inst> clone() const = 0;
 	virtual AssembledInst assembleInst(const InstVisitor& visitor) const = 0;
 	virtual ~Inst() = default;
 
-	Token getOpcode() const{
-		return opcode;
-	}
+	Token getOpcode() const { return opcode; }
 };
 
 class ArithLogI : public Inst {
@@ -105,6 +100,10 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<ArithLogI>(*this);
 	}
+
+	Token getReg1() const { return reg1; }
+	Token getReg2() const { return reg2;}
+	Token getInteger() const { return integer; }
 };
 
 class Branch : public Inst {
@@ -120,6 +119,10 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<Branch>(*this);
 	}
+
+	Token getReg1() const { return reg1; }
+	Token getReg2() const { return reg2; }
+	Token getLabel() const { return label; }
 };
 
 class BranchZ : public Inst {
@@ -134,6 +137,9 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<BranchZ>(*this);
 	}
+
+	Token getReg() const { return reg; }
+	Token getLabel() const { return label; }
 };
 
 class LoadStore : public Inst {
@@ -149,6 +155,10 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<LoadStore>(*this);
 	}
+
+	Token getReg1() const { return reg1; }
+	Token getReg2() const { return reg2; }
+	Token getOffset() const { return offset; }
 };
 
 class Jump : public Inst {
@@ -162,6 +172,7 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<Jump>(*this);
 	}
+	Token getLabel() const { return label; }
 };
 
 class JumpR : public Inst {
@@ -175,6 +186,8 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<JumpR>(*this);
 	}
+
+	Token getReg() const { return reg; }
 };
 
 class Move : public Inst {
@@ -188,6 +201,9 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<Move>(*this);
 	}
+
+	Token getReg1() const { return reg1; }
+	Token getReg2() const { return reg2; }
 };
 
 class MoveI : public Inst {
@@ -201,6 +217,8 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<MoveI>(*this);
 	}
+	Token getReg() const { return reg; }
+	Token getInteger() const { return integer; }
 };
 
 class ArithLog : public Inst {
@@ -217,6 +235,10 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<ArithLog>(*this);
 	}
+
+	Token getReg1() const { return reg1; }
+	Token getReg2() const { return reg2; }
+	Token getReg3() const { return reg3; }
 };
 
 class Shift : public Inst {
@@ -232,6 +254,10 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<Shift>(*this);
 	}
+
+	Token getReg1() const { return reg1; }
+	Token getReg2() const { return reg2; }
+	Token getInteger() const { return integer; }
 };
 
 class ShiftV : public Inst {
@@ -247,6 +273,10 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<ShiftV>(*this);
 	}
+
+	Token getReg1() const { return reg1; }
+	Token getReg2() const { return reg2; }
+	Token getReg3() const { return reg3; }
 };
 
 class Label : public Inst {
@@ -260,4 +290,6 @@ public:
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<Label>(*this);
 	}
+
+	Token getLabel() const { return label; }
 };

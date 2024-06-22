@@ -9,6 +9,7 @@ using std::string;
 
 int main() {
     string programFilePath = "./assemblyFiles/regInsn.asm";
-    assembleFile(programFilePath);
+    Assembler assembler; 
+    assembler.assembleFile(programFilePath);
     std::cout << "Hello World!\n";
 }

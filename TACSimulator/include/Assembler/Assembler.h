@@ -2,10 +2,29 @@
 
 #include <string>
 #include <exception>
+#include "../Assembler/Inst.h"
 
-void assembleFile(std::string const& filePath);
-std::string readProgramFromFile(std::string const& filePath);
+class Assembler : public InstVisitor {
+private:
+	std::string readProgramFromFile(const std::string& filePath);
+	uint8_t assembleOpcode(const Token& opcode) const;
+	uint8_t assembleRegister(const Token& reg) const;
 
+public:
+	void assembleFile(const std::string& filePath);
+	AssembledInst visit(const ArithLog& inst) const override;
+	AssembledInst visit(const Shift& inst) const override;
+	AssembledInst visit(const ShiftV& inst) const override;
+	AssembledInst visit(const ArithLogI& inst) const override;
+	AssembledInst visit(const Branch& inst) const override;
+	AssembledInst visit(const BranchZ& inst) const override;
+	AssembledInst visit(const LoadStore& inst) const override;
+	AssembledInst visit(const Jump& inst) const override;
+	AssembledInst visit(const JumpR& inst) const override;
+	AssembledInst visit(const Move& inst) const override;
+	AssembledInst visit(const MoveI& inst) const override;
+	AssembledInst visit(const Label& inst) const override;
+};
 
 class UnableToReadFromFileException : public std::exception
 {
