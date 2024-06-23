@@ -20,13 +20,15 @@ void Assembler::assembleFile(const string& filePath) {
 	queue<Token> tokenQueue = lexer.scanProgram(program);
 	Parser parser(tokenQueue);
 	queue<unique_ptr<Inst>> allInsts = parser.parseProgram();
-
     findLabelAddresses(allInsts);
 
+    queue<AssembledInst> assembledInsts;
 	while (allInsts.size() > 0) {
 		auto inst = allInsts.front().get();
-		inst->assembleInst(*this);
+   		assembledInsts.push(inst->assembleInst(*this));
 		allInsts.pop();
+
+        currentAddress += 4;
 	}
 }
 
@@ -94,38 +96,38 @@ uint8_t Assembler::assembleOpcode(const Token& opcode) const {
 
 uint8_t Assembler::assembleRegister(const Token& reg) const {
     switch (reg.type) {
-    case TokenType::r0_Reg:   return 0b00000;
-    case TokenType::r1_Reg:   return 0b00001;
-    case TokenType::r2_Reg:   return 0b00010;
-    case TokenType::r3_Reg:   return 0b00011;
-    case TokenType::r4_Reg:   return 0b00100;
-    case TokenType::r5_Reg:   return 0b00101;
-    case TokenType::r6_Reg:   return 0b00110;
-    case TokenType::r7_Reg:   return 0b00111;
-    case TokenType::r8_Reg:   return 0b01000;
-    case TokenType::r9_Reg:   return 0b01001;
-    case TokenType::r10_Reg:  return 0b01010;
-    case TokenType::r11_Reg:  return 0b01011;
-    case TokenType::r12_Reg:  return 0b01100;
-    case TokenType::r13_Reg:  return 0b01101;
-    case TokenType::r14_Reg:  return 0b01110;
-    case TokenType::r15_Reg:  return 0b01111;
-    case TokenType::r16_Reg:  return 0b10000;
-    case TokenType::r17_Reg:  return 0b10001;
-    case TokenType::r18_Reg:  return 0b10010;
-    case TokenType::r19_Reg:  return 0b10011;
-    case TokenType::r20_Reg:  return 0b10100;
-    case TokenType::r21_Reg:  return 0b10101;
-    case TokenType::r22_Reg:  return 0b10110;
-    case TokenType::r23_Reg:  return 0b10111;
-    case TokenType::r24_Reg:  return 0b11000;
-    case TokenType::r25_Reg:  return 0b11001;
-    case TokenType::r26_Reg:  return 0b11010;
-    case TokenType::r27_Reg:  return 0b11011;
-    case TokenType::rSP_Reg: return 0b11100;
-    case TokenType::rFP_Reg:  return 0b11101;
+    case TokenType::r0_Reg:    return 0b00000;
+    case TokenType::r1_Reg:    return 0b00001;
+    case TokenType::r2_Reg:    return 0b00010;
+    case TokenType::r3_Reg:    return 0b00011;
+    case TokenType::r4_Reg:    return 0b00100;
+    case TokenType::r5_Reg:    return 0b00101;
+    case TokenType::r6_Reg:    return 0b00110;
+    case TokenType::r7_Reg:    return 0b00111;
+    case TokenType::r8_Reg:    return 0b01000;
+    case TokenType::r9_Reg:    return 0b01001;
+    case TokenType::r10_Reg:   return 0b01010;
+    case TokenType::r11_Reg:   return 0b01011;
+    case TokenType::r12_Reg:   return 0b01100;
+    case TokenType::r13_Reg:   return 0b01101;
+    case TokenType::r14_Reg:   return 0b01110;
+    case TokenType::r15_Reg:   return 0b01111;
+    case TokenType::r16_Reg:   return 0b10000;
+    case TokenType::r17_Reg:   return 0b10001;
+    case TokenType::r18_Reg:   return 0b10010;
+    case TokenType::r19_Reg:   return 0b10011;
+    case TokenType::r20_Reg:   return 0b10100;
+    case TokenType::r21_Reg:   return 0b10101;
+    case TokenType::r22_Reg:   return 0b10110;
+    case TokenType::r23_Reg:   return 0b10111;
+    case TokenType::r24_Reg:   return 0b11000;
+    case TokenType::r25_Reg:   return 0b11001;
+    case TokenType::r26_Reg:   return 0b11010;
+    case TokenType::r27_Reg:   return 0b11011;
+    case TokenType::rSP_Reg:   return 0b11100;
+    case TokenType::rFP_Reg:   return 0b11101;
     case TokenType::rRET_Reg:  return 0b11110;
-    case TokenType::rIP_Reg:  return 0b11111;
+    case TokenType::rIP_Reg:   return 0b11111;
     default:
         throw std::runtime_error("Unable to match the token type as a register");
     }
@@ -151,50 +153,299 @@ void Assembler::findLabelAddresses(std::queue<std::unique_ptr<Inst>>& allInsts) 
     }
 }
 
+/*
+ * Form: ooooooss sssttttt ddddd000 00000000
+ * o: opcode
+ * s: first register,
+ * t: second register,
+ * d: third register
+ */
 AssembledInst Assembler::visit(const ArithLog& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg1 = assembleRegister(inst.getReg1());
+    uint8_t reg2 = assembleRegister(inst.getReg3());
+    uint8_t reg3 = assembleRegister(inst.getReg3());
+
+	return AssembledInst(
+        (opcode << 2) + ((reg1 & 0b11000) >> 3),
+        ((reg1 & 0b00111) << 5) + reg2,
+        reg3 << 3, 
+        0b00000000
+    );
 }
 
+/*
+ * Form: ooooooss sssttttt Maaaaaaa aaaaaaaa
+ * o: opcode
+ * s: first register,
+ * t: second register
+ * M: Sign of a. 0 is positive, 1 is negative
+ * a: Shift amount
+ */
 AssembledInst Assembler::visit(const Shift& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg1 = assembleRegister(inst.getReg1());
+    uint8_t reg2 = assembleRegister(inst.getReg2());
+    int rawShift = std::stoi(inst.getInteger().lexeme);
+
+    if (rawShift < -32768 || rawShift > 32768) {
+        throw std::runtime_error(rawShift + " can't be assembled using 15 bits.");
+    }
+    
+    uint8_t sign = (rawShift > 0) ? 0 : 1;
+    uint32_t shift = (rawShift > 0) ? rawShift : -rawShift;
+
+	return AssembledInst(
+        (opcode << 2) + ((reg1 & 0b11000) >> 3),
+        ((reg1 & 0b00111) << 5) + reg2,
+        (sign << 7) + ((shift & 0b1111111'00000000) >> 8),
+        shift & 0b0000000'11111111
+    );
 }
 
+ /*
+  * Form: ooooooss sssttttt ddddd000 00000000
+  * o: opcode
+  * s: first register,
+  * t: second register,
+  * d: third register
+  */
 AssembledInst Assembler::visit(const ShiftV& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg1 = assembleRegister(inst.getReg1());
+    uint8_t reg2 = assembleRegister(inst.getReg3());
+    uint8_t reg3 = assembleRegister(inst.getReg3());
+
+    return AssembledInst(
+        (opcode << 2) + ((reg1 & 0b11000) >> 3),
+        ((reg1 & 0b00111) << 5) + reg2,
+        reg3 << 3,
+        0b00000000
+    );
 }
 
+/*
+ * Form: ooooooss sssttttt Miiiiiii iiiiiiii
+ * o: opcode
+ * s: first register,
+ * t: second register
+ * M: Sign of i. 0 is positive, 1 is negative
+ * i: Immediate amount
+ */
 AssembledInst Assembler::visit(const ArithLogI& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg1 = assembleRegister(inst.getReg1());
+    uint8_t reg2 = assembleRegister(inst.getReg2());
+    int rawInteger = std::stoi(inst.getInteger().lexeme);
+
+    if (rawInteger < -32768 || rawInteger > 32768) {
+        throw std::runtime_error(rawInteger + " can't be assembled using 15 bits.");
+    }
+
+    uint8_t sign = (rawInteger > 0) ? 0 : 1;
+    uint32_t integer = (rawInteger > 0) ? rawInteger : -rawInteger;
+
+    return AssembledInst(
+        (opcode << 2) + ((reg1 & 0b11000) >> 3),
+        ((reg1 & 0b00111) << 5) + reg2,
+        (sign << 7) + ((integer & 0b1111111'00000000) >> 8),
+        integer & 0b0000000'11111111
+    );
 }
 
+/*
+ * Form: ooooooss sssttttt Miiiiiii iiiiiiii
+ * o: opcode
+ * s: first register,
+ * t: second register,
+ * M: sign of i
+ * i: (label - (current + 4)) >> 2
+ */
 AssembledInst Assembler::visit(const Branch& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg1 = assembleRegister(inst.getReg1());
+    uint8_t reg2 = assembleRegister(inst.getReg2());
+
+    uint32_t label;
+    auto it = labelAddresses.find(inst.getLabel().lexeme);
+    if (it != labelAddresses.end()) {
+        label = it->second;
+    } else {
+        throw std::runtime_error(inst.getLabel().lexeme + " doesn't exist as a label");
+    }
+
+    int rawJumpOffset = (label - (currentAddress + 4)) >> 2;
+    uint8_t sign = rawJumpOffset > 0 ? 0 : 1;
+    uint32_t jumpOffset = rawJumpOffset > 0 ? rawJumpOffset : -rawJumpOffset;
+
+	return AssembledInst(
+        (opcode << 2) + ((reg1 & 0b11000) >> 3),
+        ((reg1 & 0b00111) << 5) + reg2,
+        (sign << 7) + ((jumpOffset & 0b1111111'00000000) >> 8),
+        jumpOffset & 0b0000000'11111111
+    );
 }
 
+/*
+ * Form: ooooooss sss00000 Miiiiiii iiiiiiii
+ * o: opcode
+ * s: first register
+ * M: sign of i
+ * i: (label - (current + 4)) >> 2
+ */
 AssembledInst Assembler::visit(const BranchZ& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg = assembleRegister(inst.getReg());
+
+    uint32_t label;
+    auto it = labelAddresses.find(inst.getLabel().lexeme);
+    if (it != labelAddresses.end()) {
+        label = it->second;
+    }
+    else {
+        throw std::runtime_error(inst.getLabel().lexeme + " doesn't exist as a label");
+    }
+
+    int rawJumpOffset = (label - (currentAddress + 4)) >> 2;
+    uint8_t sign = rawJumpOffset > 0 ? 0 : 1;
+    uint32_t jumpOffset = rawJumpOffset > 0 ? rawJumpOffset : -rawJumpOffset;
+
+    return AssembledInst(
+        (opcode << 2) + ((reg & 0b11000) >> 3),
+        ((reg & 0b00111) << 5),
+        (sign << 7) + ((jumpOffset & 0b1111111'00000000) >> 8),
+        jumpOffset & 0b0000000'11111111
+    );
 }
 
+/*
+ * Form: ooooooss sssttttt Miiiiiii iiiiiiii
+ * o: opcode
+ * s: first register,
+ * t: second register,
+ * M: sign of i
+ * i: Memory offset
+ */
 AssembledInst Assembler::visit(const LoadStore& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg1 = assembleRegister(inst.getReg1());
+    uint8_t reg2 = assembleRegister(inst.getReg2());
+    int rawOffset = std::stoi(inst.getOffset().lexeme);
+
+    if (rawOffset < -32768 || rawOffset > 32768) {
+        throw std::runtime_error(rawOffset + " can't be assembled using 15 bits.");
+    }
+
+    uint8_t sign = (rawOffset > 0) ? 0 : 1;
+    uint32_t offset = (rawOffset > 0) ? rawOffset : -rawOffset;
+
+    return AssembledInst(
+        (opcode << 2) + ((reg1 & 0b11000) >> 3),
+        ((reg1 & 0b00111) << 5) + reg2,
+        (sign << 7) + ((offset & 0b1111111'00000000) >> 8),
+        offset & 0b0000000'11111111
+    );
 }
 
+/*
+ * Form: oooooo00 00000000 Miiiiiii iiiiiiii
+ * o: opcode
+ * M: sign of i
+ * i: (label - (current + 4)) >> 2 
+ */
 AssembledInst Assembler::visit(const Jump& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+
+    uint32_t label;
+    auto it = labelAddresses.find(inst.getLabel().lexeme);
+    if (it != labelAddresses.end()) {
+        label = it->second;
+    }
+    else {
+        throw std::runtime_error(inst.getLabel().lexeme + " doesn't exist as a label");
+    }
+
+    int rawJumpOffset = (label - (currentAddress + 4)) >> 2;
+    uint8_t sign = rawJumpOffset > 0 ? 0 : 1;
+    uint32_t jumpOffset = rawJumpOffset > 0 ? rawJumpOffset : -rawJumpOffset;
+
+    return AssembledInst(
+        (opcode << 2),
+        0b00000000,
+        (sign << 7) + ((jumpOffset & 0b1111111'00000000) >> 8),
+        jumpOffset & 0b0000000'11111111
+    );
 }
 
+/*
+ * Form: ooooooss sss00000 00000000 00000000
+ * o: opcode
+ * s: register
+ */
 AssembledInst Assembler::visit(const JumpR& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg1 = assembleRegister(inst.getReg());
+
+    return AssembledInst(
+        (opcode << 2) + ((reg1 & 0b11000) >> 3),
+        ((reg1 & 0b00111) << 5),
+        0b00000000,
+        0b00000000
+    );
 }
 
+/*
+ * Form: ooooooss sssttttt 00000000 00000000
+ * o: opcode
+ * s: register 1
+ * t: register 2
+ */
 AssembledInst Assembler::visit(const Move& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg1 = assembleRegister(inst.getReg1());
+    uint8_t reg2 = assembleRegister(inst.getReg2());
+
+	return AssembledInst(
+        (opcode << 2) + ((reg1 & 0b11000) >> 3),
+        ((reg1 & 0b00111) << 5) + reg2,
+        0b00000000, 
+        0b00000000
+    );
 }
 
+/*
+ * Form: ooooooss sssMiiii iiiiiiii iiiiiiii
+ * o: opcode
+ * s: register
+ * M: sign of M. 0 is positive, 1 is negative.
+ * i: immediate
+ */
 AssembledInst Assembler::visit(const MoveI& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    uint8_t reg = assembleRegister(inst.getReg());
+    int rawInteger = std::stoi(inst.getInteger().lexeme);
+
+    //Testing if rawInteger is larger than 20 bits.
+    if (rawInteger < -1048576 || rawInteger > 1048576) {
+        throw std::runtime_error(rawInteger + " can't be assembled");
+    }
+
+    uint8_t sign = rawInteger > 0 ? 0 : 1;
+    uint32_t integer = rawInteger > 0 ? rawInteger : -rawInteger;
+
+	return AssembledInst(
+        (opcode << 2) + ((reg & 0b11000) >> 3),
+        ((reg & 0b00111) << 5) + (sign << 4) + ((integer & 0b1111'00000000'00000000) >> 16),
+        ((integer & 0b0000'11111111'00000000) >> 8),
+        integer & 0b0000'00000000'11111111
+    );
 }
 
+/*
+ * Form: oooooo00 00000000 00000000 00000000
+ * o: opcode
+ */
 AssembledInst Assembler::visit(const Label& inst) const {
-	return AssembledInst(0x01, 0x01, 0x01, 0x01);
+    uint8_t labelOpcode = assembleOpcode(inst.getOpcode());
+	return AssembledInst(labelOpcode << 2, 0b00000000, 0b00000000, 0b00000000);
 }
