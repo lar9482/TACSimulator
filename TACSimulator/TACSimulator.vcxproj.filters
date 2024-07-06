@@ -55,5 +55,8 @@
     <None Include="assemblyFiles\loopGreaterThan.asm">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="assemblyFiles\loopLessThan.asm">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
