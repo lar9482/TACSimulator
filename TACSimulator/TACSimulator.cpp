@@ -7,8 +7,8 @@
 using std::string;
 
 int main() {
-    string input = "./assemblyFiles/memInst.asm";
-    string output = "./assemblyFiles/output/memInst.out";
+    string input = "./assemblyFiles/loopGreaterThan.asm";
+    string output = "./assemblyFiles/output/loopGreaterThan.out";
     Assembler assembler; 
     assembler.assembleFile(input, output);
 }

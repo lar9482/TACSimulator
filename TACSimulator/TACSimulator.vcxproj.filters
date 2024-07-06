@@ -52,5 +52,8 @@
     <None Include="assemblyFiles\memInst.asm">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="assemblyFiles\loopGreaterThan.asm">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

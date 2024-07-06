@@ -47,6 +47,17 @@ queue<unique_ptr<Inst>> Parser::parseProgram() {
             case TokenType::lw_Inst:
             case TokenType::lb_Inst:
                 allInsts.push(make_unique<LoadStore>(parseLoadStore())); break;
+            case TokenType::bEq_Inst:
+            case TokenType::bNe_Inst:
+            case TokenType::bGt_Inst:
+            case TokenType::bLt_Inst:
+                allInsts.push(make_unique<Branch>(parseBranch())); break;
+            case TokenType::bGTz_Inst:
+            case TokenType::bLTz_Inst:
+                allInsts.push(make_unique<BranchZ>(parseBranchZ())); break;
+            case TokenType::jmp_Inst:
+            case TokenType::jmpL_Inst:
+                allInsts.push(make_unique<Jump>(parseJump())); break;
             default:
                 throw std::runtime_error("Unable to match an opcode");
 		}
