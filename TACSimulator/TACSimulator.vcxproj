@@ -140,6 +140,9 @@
     <ClInclude Include="include\Assembler\Parser.h" />
     <ClInclude Include="include\Assembler\Token.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assemblyFiles\memInst.asm" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

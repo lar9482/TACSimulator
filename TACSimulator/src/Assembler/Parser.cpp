@@ -42,6 +42,11 @@ queue<unique_ptr<Inst>> Parser::parseProgram() {
                 allInsts.push(make_unique<ArithLogI>(parseArithLogI())); break;
             case TokenType::identifier:
                 allInsts.push(make_unique<Label>(parseLabel())); break;
+            case TokenType::sw_Inst:
+            case TokenType::sb_Inst:
+            case TokenType::lw_Inst:
+            case TokenType::lb_Inst:
+                allInsts.push(make_unique<LoadStore>(parseLoadStore())); break;
             default:
                 throw std::runtime_error("Unable to match an opcode");
 		}

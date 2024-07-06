@@ -6,10 +6,9 @@
 
 using std::string;
 
-
 int main() {
-    string input = "./assemblyFiles/regInsn.asm";
-    string output = "./assemblyFiles/output/regInst.out";
+    string input = "./assemblyFiles/memInst.asm";
+    string output = "./assemblyFiles/output/memInst.out";
     Assembler assembler; 
     assembler.assembleFile(input, output);
 }
