@@ -166,7 +166,7 @@ uint8_t Assembler::assembleRegister(const Token& reg) const {
 
 void Assembler::findLabelAddresses(std::queue<std::unique_ptr<Inst>>& allInsts) {
     size_t originalSize = allInsts.size();
-    uint8_t addressCounter = 0;
+    uint32_t addressCounter = 0;
     while (originalSize > 0) {
         unique_ptr<Inst> inst = std::move(allInsts.front());
         allInsts.pop();
