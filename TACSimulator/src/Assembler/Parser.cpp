@@ -58,6 +58,9 @@ queue<unique_ptr<Inst>> Parser::parseProgram() {
             case TokenType::jmp_Inst:
             case TokenType::jmpL_Inst:
                 allInsts.push(make_unique<Jump>(parseJump())); break;
+            case TokenType::jmpL_Reg_Inst:
+            case TokenType::jmpRet_Inst:
+                allInsts.push(make_unique<JumpR>(parseJumpR()));
             default:
                 throw std::runtime_error("Unable to match an opcode");
 		}
