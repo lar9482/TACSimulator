@@ -48,7 +48,7 @@ string Assembler::readProgramFromFile(const string& inputFilePath) {
 	return ss.str();
 }
 
-void Assembler::writeAssembledProgramToFile(const std::string& outputFilePath, queue<AssembledInst>& assembledInsts) {
+void Assembler::writeAssembledProgramToFile(const std::string& outputFilePath, queue<AssembledInst>& assembledInsts) const {
 
     string programContent;
     while (assembledInsts.size() > 0) {
@@ -72,7 +72,7 @@ void Assembler::writeAssembledProgramToFile(const std::string& outputFilePath, q
     outFile.close();
 }
 
-std::string Assembler::uint8ToHexString(uint8_t byte) {
+std::string Assembler::uint8ToHexString(uint8_t byte) const {
     std::stringstream ss;
     ss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
     return ss.str();
