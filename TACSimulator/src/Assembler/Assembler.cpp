@@ -26,7 +26,7 @@ void Assembler::assembleFile(const std::string& inputFilePath, const std::string
 
     queue<AssembledInst> assembledInsts;
 	while (allInsts.size() > 0) {
-		auto inst = allInsts.front().get();
+		Inst* inst = allInsts.front().get();
    		assembledInsts.push(inst->assembleInst(*this));
 
         currentAddress += 4;
