@@ -3,6 +3,8 @@
 #include <sstream>
 #include <queue>
 #include <memory>
+#include <iomanip>
+#include <iostream>
 
 #include "../Assembler/Assembler.h"
 #include "../Assembler/Lexer.h"
@@ -13,8 +15,8 @@ using std::string;
 using std::queue;
 using std::unique_ptr;
 
-void Assembler::assembleFile(const string& filePath) {
-	string program = readProgramFromFile(filePath);
+void Assembler::assembleFile(const std::string& inputFilePath, const std::string& outputFilePath) {
+	string program = readProgramFromFile(inputFilePath);
 	
 	Lexer lexer;
 	queue<Token> tokenQueue = lexer.scanProgram(program);
@@ -26,25 +28,54 @@ void Assembler::assembleFile(const string& filePath) {
 	while (allInsts.size() > 0) {
 		auto inst = allInsts.front().get();
    		assembledInsts.push(inst->assembleInst(*this));
-		allInsts.pop();
 
         currentAddress += 4;
+        allInsts.pop();
 	}
+    writeAssembledProgramToFile(outputFilePath, assembledInsts);
 }
 
-string Assembler::readProgramFromFile(const string& filePath) {
-	std::ifstream file(filePath);
+string Assembler::readProgramFromFile(const string& inputFilePath) {
+	std::ifstream file(inputFilePath);
 
 	if (!file) {
-		throw UnableToReadFromFileException(filePath);
+		throw UnableToReadFromFileException(inputFilePath);
 	}
 
 	std::ostringstream ss;
 	ss << file.rdbuf();
 
-	string programContent = ss.str();
+	return ss.str();
+}
 
-	return programContent;
+void Assembler::writeAssembledProgramToFile(const std::string& outputFilePath, queue<AssembledInst>& assembledInsts) {
+
+    string programContent;
+    while (assembledInsts.size() > 0) {
+        AssembledInst inst = assembledInsts.front();
+
+        programContent += uint8ToHexString(inst.byte1);
+        programContent += uint8ToHexString(inst.byte2);
+        programContent += uint8ToHexString(inst.byte3);
+        programContent += uint8ToHexString(inst.byte4);
+        programContent += "\n";
+
+        assembledInsts.pop();
+    }
+
+    std::ofstream outFile(outputFilePath);
+    if (!outFile) {
+        std::cerr << "Failed to open the file:" << outputFilePath << std::endl;
+    }
+
+    outFile << programContent;
+    outFile.close();
+}
+
+std::string Assembler::uint8ToHexString(uint8_t byte) {
+    std::stringstream ss;
+    ss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(byte);
+    return ss.str();
 }
 
 uint8_t Assembler::assembleOpcode(const Token& opcode) const {

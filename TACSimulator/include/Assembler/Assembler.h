@@ -13,12 +13,14 @@ private:
 	uint32_t currentAddress = 0;
 
 	std::string readProgramFromFile(const std::string& filePath);
+	void writeAssembledProgramToFile(const std::string& filePath, std::queue<AssembledInst>& assembledInsts);
 	uint8_t assembleOpcode(const Token& opcode) const;
 	uint8_t assembleRegister(const Token& reg) const;
 	void findLabelAddresses(std::queue<std::unique_ptr<Inst>>& allInsts);
+	std::string uint8ToHexString(uint8_t byte);
 
 public:
-	void assembleFile(const std::string& filePath);
+	void assembleFile(const std::string& inputFilePath, const std::string& outputFilePath);
 	AssembledInst visit(const ArithLog& inst) const override;
 	AssembledInst visit(const Shift& inst) const override;
 	AssembledInst visit(const ShiftV& inst) const override;

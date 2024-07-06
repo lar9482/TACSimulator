@@ -8,8 +8,8 @@ using std::string;
 
 
 int main() {
-    string programFilePath = "./assemblyFiles/regInsn.asm";
+    string input = "./assemblyFiles/regInsn.asm";
+    string output = "./assemblyFiles/output/regInst.out";
     Assembler assembler; 
-    assembler.assembleFile(programFilePath);
-    std::cout << "Hello World!\n";
+    assembler.assembleFile(input, output);
 }
