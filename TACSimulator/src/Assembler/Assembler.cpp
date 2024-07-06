@@ -45,6 +45,7 @@ string Assembler::readProgramFromFile(const string& inputFilePath) {
 	std::ostringstream ss;
 	ss << file.rdbuf();
 
+    file.close();
 	return ss.str();
 }
 
