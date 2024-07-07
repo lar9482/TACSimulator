@@ -20,6 +20,7 @@ private:
 	Move parseMove();
 	MoveI parseMoveI();
 	Label parseLabel();
+	Trap parseTrap();
 
 	Token parseReg();
 	Token consume(TokenType const& type);

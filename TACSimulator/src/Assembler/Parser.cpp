@@ -61,6 +61,8 @@ queue<unique_ptr<Inst>> Parser::parseProgram() {
             case TokenType::jmpL_Reg_Inst:
             case TokenType::jmpReg_Inst:
                 allInsts.push(make_unique<JumpR>(parseJumpR())); break;
+            case TokenType::trap_Inst:
+                allInsts.push(make_unique<Trap>(parseTrap())); break;
             default:
                 throw std::runtime_error("Unable to match an opcode");
 		}
@@ -239,6 +241,20 @@ Label Parser::parseLabel() {
     return Label(
         labelInst,
         label
+    );
+}
+
+/*
+ * Parsing instructions in the form:
+ * opcode integer
+ */
+Trap Parser::parseTrap() {
+    Token opcode = consume(tokenQueue.front().type);
+    Token trapCode = consume(TokenType::integer);
+
+    return Trap(
+        opcode,
+        trapCode
     );
 }
 
