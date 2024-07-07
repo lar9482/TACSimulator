@@ -20,4 +20,5 @@ int main() {
     // So, we're using the heap.
     Simulator simulator;
     simulator.loadProgramIntoRAM(output);
+    simulator.executeProgram();
 }

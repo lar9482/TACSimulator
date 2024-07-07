@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include "../Simulator/SimulatorEnums.h"
 
 struct DisassembledInst {
     uint8_t opcode;
@@ -25,10 +26,6 @@ struct DisassembledInst {
         immediate(immediate) {}
 };
 
-enum class Opcode {
-    d
-};
-
 class Simulator {
 
 public:
@@ -39,13 +36,14 @@ public:
 private:
 
     std::unique_ptr<std::array<uint8_t, 0xFFFF>> RAM;
-    std::array<int, 32> registers;
+    std::array<int16_t, 32> registers;
     const uint8_t PCRegister = 31;
+    const uint8_t TrapRegister = 27;
     bool exitProgram;
 
 private:
     std::array<uint8_t, 4> fetchInst() const ;
     DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst) const ;
     void executeInst(const DisassembledInst& inst);
-    
+    void executeTrap(const Trapcode& trapCode);
 };

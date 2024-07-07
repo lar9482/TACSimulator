@@ -141,6 +141,7 @@
     <ClInclude Include="include\Assembler\Parser.h" />
     <ClInclude Include="include\Assembler\Token.h" />
     <ClInclude Include="include\Simulator\Simulator.h" />
+    <ClInclude Include="include\Simulator\SimulatorEnums.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assemblyFiles\jumpLink.asm" />

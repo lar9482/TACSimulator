@@ -6,6 +6,7 @@
 #include <array>
 
 #include "../Simulator/Simulator.h"
+#include "../Simulator/SimulatorEnums.h"
 
 using std::string;
 using std::vector;
@@ -50,6 +51,7 @@ void Simulator::executeProgram() {
     while (!exitProgram) {
         array<uint8_t, 4> fetchedInst = fetchInst();
         DisassembledInst disassembledInst = decodeInst(fetchedInst);
+        executeInst(disassembledInst);
         registers[PCRegister] += 4;
     }
 }
@@ -89,5 +91,69 @@ DisassembledInst Simulator::decodeInst(const std::array<uint8_t, 4>& fetchedInst
 }
 
 void Simulator::executeInst(const DisassembledInst& inst) {
-    
+    Opcode opcode = static_cast<Opcode>(inst.opcode);
+
+    switch (opcode) {
+    case Opcode::mov_Inst: break;
+    case Opcode::add_Inst: break;
+    case Opcode::sub_Inst: break;
+    case Opcode::mult_Inst: break;
+    case Opcode::div_Inst: break;
+    case Opcode::and_Inst: break;
+    case Opcode::or_Inst: break;
+    case Opcode::xor_Inst: break;
+    case Opcode::not_Inst: break;
+    case Opcode::nor_Inst: break;
+    case Opcode::sllv_Inst: break;
+    case Opcode::srav_Inst: break;
+    case Opcode::movI_Inst: 
+        registers[inst.reg1] = inst.immediate;
+        break;
+    case Opcode::addI_Inst: break;
+    case Opcode::subI_Inst: break;
+    case Opcode::multI_Inst: break;
+    case Opcode::divI_Inst: break;
+    case Opcode::andI_Inst: break;
+    case Opcode::orI_Inst: break;
+    case Opcode::xorI_Inst: break;
+    case Opcode::notI_Inst: break;
+    case Opcode::norI_Inst: break;
+    case Opcode::sll_Inst: break;
+    case Opcode::sra_Inst: break;
+    case Opcode::bEq_Inst: break;
+    case Opcode::bNe_Inst: break;
+    case Opcode::bLt_Inst: break;
+    case Opcode::bGt_Inst: break;
+    case Opcode::bLTz_Inst: break;
+    case Opcode::bGTz_Inst: break;
+    case Opcode::jmp_Inst: break;
+    case Opcode::jmpL_Inst: break;
+    case Opcode::jmpL_Reg_Inst: break;
+    case Opcode::jmpReg_Inst: break;
+    case Opcode::lb_Inst: break;
+    case Opcode::lw_Inst: break;
+    case Opcode::sb_Inst: break;
+    case Opcode::sw_Inst: break;
+    case Opcode::trap_Inst: 
+        executeTrap(static_cast<Trapcode>(inst.immediate));
+        break;
+    case Opcode::label_Inst: break;
+    }
+}
+
+void Simulator::executeTrap(const Trapcode& trapCode) {
+    switch (trapCode) {
+    case Trapcode::print_int: 
+        std::cout << registers[TrapRegister];
+        break;
+    case Trapcode::print_string: break;
+    case Trapcode::println_string: break;
+    case Trapcode::read_int: break;
+    case Trapcode::read_string: break;
+    case Trapcode::malloc: break;
+    case Trapcode::free: break;
+    case Trapcode::exit: 
+        exitProgram = true;
+        break;
+    }
 }
