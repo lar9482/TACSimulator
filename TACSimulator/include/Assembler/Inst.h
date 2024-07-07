@@ -39,6 +39,7 @@ class JumpR;
 class Move;
 class MoveI;
 class Label;
+class Trap;
 
 class InstVisitor {
 protected:
@@ -61,6 +62,7 @@ public:
 	virtual AssembledInst visit(const Move& inst) const = 0;
 	virtual AssembledInst visit(const MoveI& inst) const = 0;
 	virtual AssembledInst visit(const Label& inst) const = 0;
+	virtual AssembledInst visit(const Trap& inst) const = 0;
 	virtual ~InstVisitor() = default;
 };
 
@@ -292,4 +294,18 @@ public:
 	}
 
 	Token getLabel() const { return label; }
+};
+
+class Trap : public Inst {
+private:
+	Token trapCode;
+public:
+	Trap(Token& opcode, Token& trapCode);
+	AssembledInst assembleInst(const InstVisitor& visitor) const override;
+
+	std::unique_ptr<Inst> clone() const override {
+		return std::make_unique<Trap>(*this);
+	}
+
+	Token getTrapCode() const { return trapCode; }
 };

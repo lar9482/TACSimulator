@@ -481,3 +481,7 @@ AssembledInst Assembler::visit(const Label& inst) const {
     uint8_t labelOpcode = assembleOpcode(inst.getOpcode());
 	return AssembledInst(labelOpcode << 2, 0b00000000, 0b00000000, 0b00000000);
 }
+
+AssembledInst Assembler::visit(const Trap& inst) const {
+    return AssembledInst(0, 0, 0, 0);
+}

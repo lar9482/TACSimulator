@@ -33,6 +33,7 @@ public:
 	AssembledInst visit(const Move& inst) const override;
 	AssembledInst visit(const MoveI& inst) const override;
 	AssembledInst visit(const Label& inst) const override;
+	AssembledInst visit(const Trap& inst) const override;
 };
 
 class UnableToReadFromFileException : public std::exception

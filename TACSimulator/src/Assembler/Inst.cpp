@@ -122,3 +122,12 @@ Label::Label(Token& opcode, Token& label) :
 AssembledInst Label::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
+
+Trap::Trap(Token& opcode, Token& trapCode) :
+    Inst(opcode),
+    trapCode(trapCode)
+{}
+
+AssembledInst Trap::assembleInst(const InstVisitor& visitor) const {
+    return visitor.visit(*this);
+}

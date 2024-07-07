@@ -35,6 +35,7 @@ public:
 private:
     std::unique_ptr<std::array<uint8_t, 0xFFFF>> RAM;
     std::array<int, 32> registers;
+    const uint8_t PCRegister = 31;
 
 private:
     void fetchInst();
