@@ -141,6 +141,7 @@
     <ClInclude Include="include\Assembler\Token.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assemblyFiles\jumpLink.asm" />
     <None Include="assemblyFiles\loopGreaterThan.asm" />
     <None Include="assemblyFiles\loopLessThan.asm" />
     <None Include="assemblyFiles\memInst.asm" />

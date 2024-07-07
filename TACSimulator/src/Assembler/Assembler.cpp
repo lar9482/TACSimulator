@@ -114,7 +114,7 @@ uint8_t Assembler::assembleOpcode(const Token& opcode) const {
     case TokenType::jmp_Inst:      return 0b011110;
     case TokenType::jmpL_Inst:     return 0b011111;
     case TokenType::jmpL_Reg_Inst: return 0b100000;
-    case TokenType::jmpRet_Inst:   return 0b100001;
+    case TokenType::jmpReg_Inst:   return 0b100001;
     case TokenType::lb_Inst:       return 0b100010;
     case TokenType::lw_Inst:       return 0b100011;
     case TokenType::sb_Inst:       return 0b100100;
@@ -155,7 +155,7 @@ uint8_t Assembler::assembleRegister(const Token& reg) const {
     case TokenType::r24_Reg:   return 0b11000;
     case TokenType::r25_Reg:   return 0b11001;
     case TokenType::r26_Reg:   return 0b11010;
-    case TokenType::r27_Reg:   return 0b11011;
+    case TokenType::rT_Reg:    return 0b11011;
     case TokenType::rSP_Reg:   return 0b11100;
     case TokenType::rFP_Reg:   return 0b11101;
     case TokenType::rRET_Reg:  return 0b11110;

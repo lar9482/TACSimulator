@@ -82,7 +82,7 @@ pair<MatchType, string> Lexer::findLongestMatch(string const& program) const {
 }
 
 /*
- * Identifiers will be matched by "[a-zA-Z]_1[a-zA-Z0-9]*"
+ * Identifiers will be matched by "[a-zA-Z]_1[a-zA-Z0-9_]*"
  */
 string Lexer::matchIdentifer(string const& program) const {
     string identifier = "";
@@ -98,7 +98,8 @@ string Lexer::matchIdentifer(string const& program) const {
 
     while ((program[i] >= 'a' && program[i] <= 'z') || 
         (program[i] >= 'A' && program[i] <= 'Z') ||
-        (program[i] >= '0' && program[i] <= '9')) {
+        (program[i] >= '0' && program[i] <= '9') ||
+        program[i] == '_') {
         identifier += program[i];
         i++;
     }
@@ -182,7 +183,7 @@ Token Lexer::resolveIdentifier(string const& identifier) const {
     else if (identifier == "r24") return Token(identifier, TokenType::r24_Reg, lineCounter, columnCounter);
     else if (identifier == "r25") return Token(identifier, TokenType::r25_Reg, lineCounter, columnCounter);
     else if (identifier == "r26") return Token(identifier, TokenType::r26_Reg, lineCounter, columnCounter);
-    else if (identifier == "r27") return Token(identifier, TokenType::r27_Reg, lineCounter, columnCounter);
+    else if (identifier == "rT") return Token(identifier, TokenType::rT_Reg, lineCounter, columnCounter);
     else if (identifier == "rSP") return Token(identifier, TokenType::rSP_Reg, lineCounter, columnCounter);
     else if (identifier == "rFP") return Token(identifier, TokenType::rFP_Reg, lineCounter, columnCounter);
     else if (identifier == "rRET") return Token(identifier, TokenType::rRET_Reg, lineCounter, columnCounter);
@@ -220,7 +221,7 @@ Token Lexer::resolveIdentifier(string const& identifier) const {
     else if (identifier == "jmp") return Token(identifier, TokenType::jmp_Inst, lineCounter, columnCounter);
     else if (identifier == "jmpL") return Token(identifier, TokenType::jmpL_Inst, lineCounter, columnCounter);
     else if (identifier == "jmpL_Reg") return Token(identifier, TokenType::jmpL_Reg_Inst, lineCounter, columnCounter);
-    else if (identifier == "jmpRet") return Token(identifier, TokenType::jmpRet_Inst, lineCounter, columnCounter);
+    else if (identifier == "jmpReg") return Token(identifier, TokenType::jmpReg_Inst, lineCounter, columnCounter);
     else if (identifier == "lb") return Token(identifier, TokenType::lb_Inst, lineCounter, columnCounter);
     else if (identifier == "lw") return Token(identifier, TokenType::lw_Inst, lineCounter, columnCounter);
     else if (identifier == "sb") return Token(identifier, TokenType::sb_Inst, lineCounter, columnCounter);

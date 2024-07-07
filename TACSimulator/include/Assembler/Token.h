@@ -31,7 +31,7 @@ enum class TokenType {
     r24_Reg,
     r25_Reg,
     r26_Reg,
-    r27_Reg,
+    rT_Reg, //Trap system call register 
     rSP_Reg, //Stack pointer register
     rFP_Reg, //Frame pointer register 
     rRET_Reg, //Return pointer register
@@ -77,7 +77,7 @@ enum class TokenType {
     jmp_Inst, //(opcode label)
     jmpL_Inst, // (opcode label)
     jmpL_Reg_Inst, //(opcode reg)
-    jmpRet_Inst, // (opcode reg)
+    jmpReg_Inst, // (opcode reg)
 
     //Memory instructions (opcode reg, reg(integer))
     lb_Inst,
