@@ -25,6 +25,10 @@ struct DisassembledInst {
         immediate(immediate) {}
 };
 
+enum class Opcode {
+    d
+};
+
 class Simulator {
 
 public:
@@ -33,6 +37,7 @@ public:
     void executeProgram();
 
 private:
+
     std::unique_ptr<std::array<uint8_t, 0xFFFF>> RAM;
     std::array<int, 32> registers;
     const uint8_t PCRegister = 31;
@@ -41,5 +46,6 @@ private:
 private:
     std::array<uint8_t, 4> fetchInst();
     DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst);
-    void executeInst();
+    void executeInst(const DisassembledInst& inst);
+    
 };

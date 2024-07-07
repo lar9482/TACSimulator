@@ -88,6 +88,6 @@ DisassembledInst Simulator::decodeInst(const std::array<uint8_t, 4>& fetchedInst
     );
 }
 
-void Simulator::executeInst() {
-
+void Simulator::executeInst(const DisassembledInst& inst) {
+    
 }
