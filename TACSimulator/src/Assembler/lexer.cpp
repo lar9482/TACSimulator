@@ -226,10 +226,7 @@ Token Lexer::resolveIdentifier(string const& identifier) const {
     else if (identifier == "lw") return Token(identifier, TokenType::lw_Inst, lineCounter, columnCounter);
     else if (identifier == "sb") return Token(identifier, TokenType::sb_Inst, lineCounter, columnCounter);
     else if (identifier == "sw") return Token(identifier, TokenType::sw_Inst, lineCounter, columnCounter);
-    else if (identifier == "halt") return Token(identifier, TokenType::halt_Inst, lineCounter, columnCounter);
-    else if (identifier == "printw_Int") return Token(identifier, TokenType::printw_Int_Inst, lineCounter, columnCounter);
-    else if (identifier == "printw_Hex") return Token(identifier, TokenType::printw_Hex_Inst, lineCounter, columnCounter);
-    else if (identifier == "printw_Bin") return Token(identifier, TokenType::printw_Bin_Inst, lineCounter, columnCounter);
+    else if (identifier == "trap") return Token(identifier, TokenType::trap_Inst, lineCounter, columnCounter);
     else return Token(identifier, TokenType::identifier, lineCounter, columnCounter);
 }
 

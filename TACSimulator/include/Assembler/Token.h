@@ -84,13 +84,11 @@ enum class TokenType {
     lw_Inst,
     sb_Inst,
     sw_Inst,
+
+    //Miscellaneous labels
+    trap_Inst,
     label_Inst,
 
-    //Interrupt instructions
-    halt_Inst,
-    printw_Int_Inst,
-    printw_Hex_Inst,
-    printw_Bin_Inst,
     //Other stuff
     identifier,
     integer,
