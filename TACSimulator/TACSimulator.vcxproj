@@ -147,6 +147,7 @@
     <None Include="assemblyFiles\loopGreaterThan.asm" />
     <None Include="assemblyFiles\loopLessThan.asm" />
     <None Include="assemblyFiles\memInst.asm" />
+    <None Include="assemblyFiles\printInt.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

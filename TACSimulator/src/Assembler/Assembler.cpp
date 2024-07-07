@@ -482,6 +482,35 @@ AssembledInst Assembler::visit(const Label& inst) const {
 	return AssembledInst(labelOpcode << 2, 0b00000000, 0b00000000, 0b00000000);
 }
 
+/*
+ * Form: oooooo00 00000000 00000000 iiiiiiii
+ * o: opcode
+ * i: Trapcode
+ * 
+ * i   Name               Input                            Output                         Description:
+ * 0:  print_int          rT has int to print              -                              Print an int value to standard output in decimal.    
+ * 1:  print_string       rT has ASCIIZ address to print   -                              Print an ASCIIZ string to standard output.
+ * 2:  println_string     rT has ASCIIZ address to print   -                              Print an ASCIIZ string to standard output with a newline
+ * 3:  read_int           -                                rT has int that has read       Reads an int value into rT
+ * 4:  read_string        -                                rT has the starting address    Reads an ASCIIZ value, then placing the starting address into rT
+ * 5:  malloc             -                                rT has the starting address    Allocates rT bytes on the heap
+ * 6:  free               rT has the starting address      -                              Frees the bytes starting at rT
+ * 7:  exit               -                                -                              Terminate the program
+ */
 AssembledInst Assembler::visit(const Trap& inst) const {
-    return AssembledInst(0, 0, 0, 0);
+    uint8_t opcode = assembleOpcode(inst.getOpcode());
+    int rawTrapcode = std::stoi(inst.getTrapCode().lexeme);
+
+    if (rawTrapcode < 0|| rawTrapcode > 7) {
+        throw std::runtime_error(rawTrapcode + " can't be assembled");
+    }
+
+    uint8_t trapcode = static_cast<uint8_t>(rawTrapcode);
+
+    return AssembledInst(
+        opcode << 2,
+        0b0000'0000,
+        0b0000'0000,
+        trapcode
+    );
 }

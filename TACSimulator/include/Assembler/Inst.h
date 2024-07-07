@@ -16,13 +16,8 @@ struct AssembledInst {
 	uint8_t byte3;
 	uint8_t byte4;
 
-	AssembledInst(uint8_t& byte1, uint8_t& byte2,
-		uint8_t& byte3, uint8_t& byte4
-	) : byte1(byte1), byte2(byte2),
-		byte3(byte3), byte4(byte4) {}
-
-	AssembledInst(uint8_t&& byte1, uint8_t&& byte2,
-		uint8_t&& byte3, uint8_t&& byte4
+	AssembledInst(uint8_t byte1, uint8_t byte2,
+		uint8_t byte3, uint8_t byte4
 	) : byte1(byte1), byte2(byte2),
 		byte3(byte3), byte4(byte4) {}
 };

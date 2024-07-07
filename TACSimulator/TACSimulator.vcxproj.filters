@@ -67,5 +67,8 @@
     <None Include="assemblyFiles\jumpLink.asm">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="assemblyFiles\printInt.asm">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

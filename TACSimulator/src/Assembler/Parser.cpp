@@ -11,6 +11,8 @@ Parser::Parser(std::queue<Token>& tokenQueue)
 
 queue<unique_ptr<Inst>> Parser::parseProgram() {
     queue<unique_ptr<Inst>> allInsts;
+    bool exitDetected = false;
+
 	while (tokenQueue.size() > 0) {
 		switch (tokenQueue.front().type) {
             case TokenType::mov_Inst:
@@ -62,12 +64,30 @@ queue<unique_ptr<Inst>> Parser::parseProgram() {
             case TokenType::jmpReg_Inst:
                 allInsts.push(make_unique<JumpR>(parseJumpR())); break;
             case TokenType::trap_Inst:
-                allInsts.push(make_unique<Trap>(parseTrap())); break;
+            {
+                // Testing if a trapcode 7(exit) exists.
+                // This context is needed if an exit needs to be automatically added.
+                unique_ptr<Trap> trapInst = make_unique<Trap>(parseTrap());
+                int trapCode = std::stoi(trapInst->getTrapCode().lexeme);
+                if (trapCode == 7) {
+                    exitDetected = true;
+                }
+                allInsts.push(std::move(trapInst));
+            }
+                break;
             default:
                 throw std::runtime_error("Unable to match an opcode");
 		}
 	}
 
+    // Automatically adding a trap code of 7(exit) if none were found in the program.
+    if (!exitDetected) {
+        Token opcode = Token("trap", TokenType::trap_Inst, static_cast<int>(allInsts.size()), 1);
+        Token trapCode = Token("7", TokenType::integer, static_cast<int>(allInsts.size()), 1);
+        allInsts.push(
+            make_unique<Trap>(Trap(opcode, trapCode))
+        );
+    }
     return allInsts;
 }
 
