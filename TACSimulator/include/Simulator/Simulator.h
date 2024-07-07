@@ -36,10 +36,11 @@ private:
     std::unique_ptr<std::array<uint8_t, 0xFFFF>> RAM;
     std::array<int, 32> registers;
     const uint8_t PCRegister = 31;
+    bool exitProgram;
 
 private:
-    void fetchInst();
-    void decodeInst();
+    std::array<uint8_t, 4> fetchInst();
+    DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst);
     void executeInst();
     DisassembledInst disassembleInst(const std::string& assembledInst);
 };
