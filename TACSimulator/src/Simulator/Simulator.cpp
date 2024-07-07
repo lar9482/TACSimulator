@@ -54,7 +54,7 @@ void Simulator::executeProgram() {
     }
 }
 
-array<uint8_t, 4> Simulator::fetchInst() {
+array<uint8_t, 4> Simulator::fetchInst() const {
     array<uint8_t, 4> fetchedInst;
     fetchedInst[0] = RAM->at(registers[PCRegister]);
     fetchedInst[1] = RAM->at(registers[PCRegister] + 1);
@@ -66,7 +66,7 @@ array<uint8_t, 4> Simulator::fetchInst() {
 
 // ooooooss sssttttt ddddd000 00000000
 // ooooooss sssttttt Miiiiiii iiiiiiii
-DisassembledInst Simulator::decodeInst(const std::array<uint8_t, 4>& fetchedInst) {
+DisassembledInst Simulator::decodeInst(const std::array<uint8_t, 4>& fetchedInst) const {
     uint8_t opcode = (fetchedInst[0] & 0b1111'1100) >> 2;
     uint8_t reg1 = ((fetchedInst[0] & 0b0000'0011) << 3) + ((fetchedInst[1] & 0b1110'0000) >> 5);
     uint8_t reg2 = fetchedInst[1] & 0b00011111;

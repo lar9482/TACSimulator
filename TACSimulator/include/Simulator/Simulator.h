@@ -44,8 +44,8 @@ private:
     bool exitProgram;
 
 private:
-    std::array<uint8_t, 4> fetchInst();
-    DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst);
+    std::array<uint8_t, 4> fetchInst() const ;
+    DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst) const ;
     void executeInst(const DisassembledInst& inst);
     
 };
