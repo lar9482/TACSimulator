@@ -131,6 +131,7 @@
     <ClCompile Include="src\Assembler\Inst.cpp" />
     <ClCompile Include="src\Assembler\Lexer.cpp" />
     <ClCompile Include="src\Assembler\Parser.cpp" />
+    <ClCompile Include="src\Simulator\Simulator.cpp" />
     <ClCompile Include="TACSimulator.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="include\Assembler\Lexer.h" />
     <ClInclude Include="include\Assembler\Parser.h" />
     <ClInclude Include="include\Assembler\Token.h" />
+    <ClInclude Include="include\Simulator\Simulator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assemblyFiles\jumpLink.asm" />

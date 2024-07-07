@@ -446,7 +446,7 @@ AssembledInst Assembler::visit(const Move& inst) const {
 }
 
 /*
- * Form: ooooooss sssMiiii iiiiiiii iiiiiiii
+ * Form: ooooooss sss00000 Miiiiiii iiiiiiii
  * o: opcode
  * s: register
  * M: sign of M. 0 is positive, 1 is negative.
@@ -457,8 +457,8 @@ AssembledInst Assembler::visit(const MoveI& inst) const {
     uint8_t reg = assembleRegister(inst.getReg());
     int rawInteger = std::stoi(inst.getInteger().lexeme);
 
-    //Testing if rawInteger is larger than 20 bits.
-    if (rawInteger < -1048576 || rawInteger > 1048576) {
+    //Testing if rawInteger is larger than 15 bits.
+    if (rawInteger < -32768 || rawInteger > 32768) {
         throw std::runtime_error(rawInteger + " can't be assembled");
     }
 
@@ -467,9 +467,9 @@ AssembledInst Assembler::visit(const MoveI& inst) const {
 
 	return AssembledInst(
         (opcode << 2) + ((reg & 0b11000) >> 3),
-        ((reg & 0b00111) << 5) + (sign << 4) + ((integer & 0b1111'00000000'00000000) >> 16),
-        ((integer & 0b0000'11111111'00000000) >> 8),
-        integer & 0b0000'00000000'11111111
+        ((reg & 0b00111) << 5),
+        (sign << 7) + ((integer & 0b1111111'00000000) >> 8),
+        integer & 0b0000000'11111111
     );
 }
 
