@@ -42,5 +42,4 @@ private:
     std::array<uint8_t, 4> fetchInst();
     DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst);
     void executeInst();
-    DisassembledInst disassembleInst(const std::string& assembledInst);
 };

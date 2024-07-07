@@ -54,20 +54,6 @@ void Simulator::executeProgram() {
     }
 }
 
-// ooooooss sssttttt ddddd000 00000000
-// ooooooss sssttttt Miiiiiii iiiiiiii
-DisassembledInst Simulator::disassembleInst(const std::string& assembledInst) {
-    uint8_t firstByte = static_cast<uint8_t>(std::stoi(assembledInst.substr(0, 2), nullptr, 16));
-    uint8_t secondByte = static_cast<uint8_t>(std::stoi(assembledInst.substr(2, 2), nullptr, 16));
-    uint8_t thirdByte = static_cast<uint8_t>(std::stoi(assembledInst.substr(4, 2), nullptr, 16));
-    uint8_t fourthByte = static_cast<uint8_t>(std::stoi(assembledInst.substr(6, 2), nullptr, 16));
-
-    uint8_t opcode = (firstByte & 0b11111100) >> 2;
-    uint8_t reg1 = ((firstByte & 0b00000011) << 3) + ((secondByte & 0b11100000) >> 5);
-    // uint8_t reg2 = ();
-    return DisassembledInst(0, 0, 0, 0, 0);
-}
-
 array<uint8_t, 4> Simulator::fetchInst() {
     array<uint8_t, 4> fetchedInst;
     fetchedInst[0] = RAM->at(registers[PCRegister]);
