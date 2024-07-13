@@ -9,7 +9,7 @@
 using std::string;
 
 int main() {
-    string fileName = "printInt";
+    string fileName = "regInst.asm";
     string input = "./assemblyFiles/" + fileName + ".asm";
     string output = "./assemblyFiles/output/" + fileName + ".out";
 

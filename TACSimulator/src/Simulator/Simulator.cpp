@@ -94,18 +94,40 @@ void Simulator::executeInst(const DisassembledInst& inst) {
     Opcode opcode = static_cast<Opcode>(inst.opcode);
 
     switch (opcode) {
-    case Opcode::mov_Inst: break;
-    case Opcode::add_Inst: break;
-    case Opcode::sub_Inst: break;
-    case Opcode::mult_Inst: break;
-    case Opcode::div_Inst: break;
-    case Opcode::and_Inst: break;
-    case Opcode::or_Inst: break;
-    case Opcode::xor_Inst: break;
-    case Opcode::not_Inst: break;
-    case Opcode::nor_Inst: break;
+    case Opcode::mov_Inst: 
+        registers[inst.reg1] = registers[inst.reg2];
+        break;
+    case Opcode::add_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] + registers[inst.reg3];
+        break;
+    case Opcode::sub_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] - registers[inst.reg3];
+        break;
+    case Opcode::mult_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] * registers[inst.reg3];
+        break;
+    case Opcode::div_Inst: 
+        registers[inst.reg1] = static_cast<int16_t>(registers[inst.reg2] / registers[inst.reg3]);
+        break;
+    case Opcode::and_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] & registers[inst.reg3];
+        break;
+    case Opcode::or_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] | registers[inst.reg3];
+        break;
+    case Opcode::xor_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] ^ registers[inst.reg3];
+        break;
+    case Opcode::not_Inst: 
+        break;
+    case Opcode::nor_Inst: 
+        registers[inst.reg1] = ~(registers[inst.reg2] | registers[inst.reg3]);
+        break;
     case Opcode::sllv_Inst: break;
-    case Opcode::srav_Inst: break;
+        registers[inst.reg1] = registers[inst.reg2] << registers[inst.reg3];
+    case Opcode::srav_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] >> registers[inst.reg3];
+        break;
     case Opcode::movI_Inst: 
         registers[inst.reg1] = inst.immediate;
         break;
