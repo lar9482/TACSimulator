@@ -126,6 +126,7 @@ void Simulator::executeInst(const DisassembledInst& inst) {
         break;
     case Opcode::sllv_Inst: break;
         registers[inst.reg1] = registers[inst.reg2] << registers[inst.reg3];
+        break;
     case Opcode::srav_Inst: 
         registers[inst.reg1] = registers[inst.reg2] >> registers[inst.reg3];
         break;
