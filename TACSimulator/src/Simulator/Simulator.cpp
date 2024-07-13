@@ -142,7 +142,7 @@ void Simulator::executeInst(const DisassembledInst& inst) {
         registers[inst.reg1] = registers[inst.reg2] * inst.immediate;
         break;
     case Opcode::divI_Inst: 
-        registers[inst.reg1] = static_cast<int16_t>(registers[inst.reg2] + inst.immediate);
+        registers[inst.reg1] = static_cast<int16_t>(registers[inst.reg2] / inst.immediate);
         break;
     case Opcode::andI_Inst: 
         registers[inst.reg1] = registers[inst.reg2] & inst.immediate;
