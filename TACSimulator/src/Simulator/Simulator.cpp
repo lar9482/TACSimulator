@@ -29,6 +29,7 @@ void Simulator::loadProgramIntoRAM(const std::string& filePath) {
 
     string assembledInst;
     size_t addressCounter = 0;
+
     while (std::getline(inputFile, assembledInst)) {
         std::cout << assembledInst << std::endl;
         uint8_t firstByte = static_cast<uint8_t>(std::stoi(assembledInst.substr(0, 2), nullptr, 16));
@@ -131,17 +132,38 @@ void Simulator::executeInst(const DisassembledInst& inst) {
     case Opcode::movI_Inst: 
         registers[inst.reg1] = inst.immediate;
         break;
-    case Opcode::addI_Inst: break;
-    case Opcode::subI_Inst: break;
-    case Opcode::multI_Inst: break;
-    case Opcode::divI_Inst: break;
-    case Opcode::andI_Inst: break;
-    case Opcode::orI_Inst: break;
-    case Opcode::xorI_Inst: break;
-    case Opcode::notI_Inst: break;
-    case Opcode::norI_Inst: break;
-    case Opcode::sll_Inst: break;
-    case Opcode::sra_Inst: break;
+    case Opcode::addI_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] + inst.immediate;
+        break;
+    case Opcode::subI_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] - inst.immediate;
+        break;
+    case Opcode::multI_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] * inst.immediate;
+        break;
+    case Opcode::divI_Inst: 
+        registers[inst.reg1] = static_cast<int16_t>(registers[inst.reg2] + inst.immediate);
+        break;
+    case Opcode::andI_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] & inst.immediate;
+        break;
+    case Opcode::orI_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] | inst.immediate;
+        break;
+    case Opcode::xorI_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] ^ inst.immediate;
+        break;
+    case Opcode::notI_Inst: 
+        break;
+    case Opcode::norI_Inst: 
+        registers[inst.reg1] = ~(registers[inst.reg2] | inst.immediate);
+        break;
+    case Opcode::sll_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] << inst.immediate;
+        break;
+    case Opcode::sra_Inst: 
+        registers[inst.reg1] = registers[inst.reg2] >> inst.immediate;
+        break;
     case Opcode::bEq_Inst: break;
     case Opcode::bNe_Inst: break;
     case Opcode::bLt_Inst: break;
