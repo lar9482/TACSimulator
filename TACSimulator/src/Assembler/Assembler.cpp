@@ -195,7 +195,7 @@ void Assembler::findLabelAddresses(std::queue<std::unique_ptr<Inst>>& allInsts) 
 AssembledInst Assembler::visit(const ArithLog& inst) const {
     uint8_t opcode = assembleOpcode(inst.getOpcode());
     uint8_t reg1 = assembleRegister(inst.getReg1());
-    uint8_t reg2 = assembleRegister(inst.getReg3());
+    uint8_t reg2 = assembleRegister(inst.getReg2());
     uint8_t reg3 = assembleRegister(inst.getReg3());
 
 	return AssembledInst(
@@ -245,7 +245,7 @@ AssembledInst Assembler::visit(const Shift& inst) const {
 AssembledInst Assembler::visit(const ShiftV& inst) const {
     uint8_t opcode = assembleOpcode(inst.getOpcode());
     uint8_t reg1 = assembleRegister(inst.getReg1());
-    uint8_t reg2 = assembleRegister(inst.getReg3());
+    uint8_t reg2 = assembleRegister(inst.getReg2());
     uint8_t reg3 = assembleRegister(inst.getReg3());
 
     return AssembledInst(
