@@ -180,15 +180,27 @@ void Simulator::executeInst(const DisassembledInst& inst) {
     case Opcode::sra_Inst: 
         registers[inst.reg1] = registers[inst.reg2] >> inst.immediate;
         break;
-    case Opcode::bEq_Inst: 
-        
+    case Opcode::bEq_Inst:
+    {
+        if (registers[inst.reg1] == registers[inst.reg2]) {
+            registers[PCRegister] += inst.immediate << 2;
+        }
+    }
         break;
-    case Opcode::bNe_Inst: break;
+    case Opcode::bNe_Inst:
+    {
+        if (registers[inst.reg1] != registers[inst.reg2]) {
+            registers[PCRegister] += inst.immediate << 2;
+        }
+    }
+        break;
     case Opcode::bLt_Inst: break;
     case Opcode::bGt_Inst: break;
     case Opcode::bLTz_Inst: break;
     case Opcode::bGTz_Inst: break;
-    case Opcode::jmp_Inst: break;
+    case Opcode::jmp_Inst:
+        registers[PCRegister] += inst.immediate << 2;
+        break;
     case Opcode::jmpL_Inst: break;
     case Opcode::jmpL_Reg_Inst: break;
     case Opcode::jmpReg_Inst: break;

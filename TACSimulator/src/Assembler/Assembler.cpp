@@ -177,10 +177,10 @@ void Assembler::findLabelAddresses(std::queue<std::unique_ptr<Inst>>& allInsts) 
             Token labelToken = labelInst->getLabel();
 
             labelAddresses[labelToken.lexeme] = addressCounter;
-            addressCounter += 4;
         }
 
         allInsts.push(std::move(inst));
+        addressCounter += 4;
         originalSize--;
     }
 }
@@ -291,7 +291,7 @@ AssembledInst Assembler::visit(const ArithLogI& inst) const {
  * s: first register,
  * t: second register,
  * M: sign of i
- * i: (label - (current + 4)) >> 2
+ * i: (label - current) >> 2
  */
 AssembledInst Assembler::visit(const Branch& inst) const {
     uint8_t opcode = assembleOpcode(inst.getOpcode());
@@ -306,7 +306,7 @@ AssembledInst Assembler::visit(const Branch& inst) const {
         throw std::runtime_error(inst.getLabel().lexeme + " doesn't exist as a label");
     }
 
-    int rawJumpOffset = (label - (currentAddress + 4)) >> 2;
+    int rawJumpOffset = static_cast<int>(label - currentAddress) >> 2;
     uint8_t sign = rawJumpOffset > 0 ? 0 : 1;
     uint32_t jumpOffset = rawJumpOffset > 0 ? rawJumpOffset : -rawJumpOffset;
 
@@ -323,7 +323,7 @@ AssembledInst Assembler::visit(const Branch& inst) const {
  * o: opcode
  * s: first register
  * M: sign of i
- * i: (label - (current + 4)) >> 2
+ * i: (label - current) >> 2
  */
 AssembledInst Assembler::visit(const BranchZ& inst) const {
     uint8_t opcode = assembleOpcode(inst.getOpcode());
@@ -338,7 +338,7 @@ AssembledInst Assembler::visit(const BranchZ& inst) const {
         throw std::runtime_error(inst.getLabel().lexeme + " doesn't exist as a label");
     }
 
-    int rawJumpOffset = (label - (currentAddress + 4)) >> 2;
+    int rawJumpOffset = static_cast<int>(label - currentAddress) >> 2;
     uint8_t sign = rawJumpOffset > 0 ? 0 : 1;
     uint32_t jumpOffset = rawJumpOffset > 0 ? rawJumpOffset : -rawJumpOffset;
 
@@ -383,7 +383,7 @@ AssembledInst Assembler::visit(const LoadStore& inst) const {
  * Form: oooooo00 00000000 Miiiiiii iiiiiiii
  * o: opcode
  * M: sign of i
- * i: (label - (current + 4)) >> 2 
+ * i: (label - current) >> 2 
  */
 AssembledInst Assembler::visit(const Jump& inst) const {
     uint8_t opcode = assembleOpcode(inst.getOpcode());
@@ -397,7 +397,7 @@ AssembledInst Assembler::visit(const Jump& inst) const {
         throw std::runtime_error(inst.getLabel().lexeme + " doesn't exist as a label");
     }
 
-    int rawJumpOffset = (label - (currentAddress + 4)) >> 2;
+    int rawJumpOffset = static_cast<int>(label - currentAddress) >> 2;
     uint8_t sign = rawJumpOffset > 0 ? 0 : 1;
     uint32_t jumpOffset = rawJumpOffset > 0 ? rawJumpOffset : -rawJumpOffset;
 

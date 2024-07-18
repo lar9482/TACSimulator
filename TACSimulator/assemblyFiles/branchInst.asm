@@ -1,6 +1,6 @@
 notEqual:
     movI r3, 432
-    movI r4, 674674
+    movI r4, 6746
     jmp exit
 
 isEqual:
