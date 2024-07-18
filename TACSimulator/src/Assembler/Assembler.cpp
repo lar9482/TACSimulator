@@ -474,12 +474,21 @@ AssembledInst Assembler::visit(const MoveI& inst) const {
 }
 
 /*
- * Form: oooooo00 00000000 00000000 00000000
+ * Form: ooooooM0 00000000 00000000 00000000
  * o: opcode
+ * M: 0 indicates that is a generic label
+ *    1 indicates that is the a main label, and the PC register needs to start here.
  */
 AssembledInst Assembler::visit(const Label& inst) const {
     uint8_t labelOpcode = assembleOpcode(inst.getOpcode());
-	return AssembledInst(labelOpcode << 2, 0b00000000, 0b00000000, 0b00000000);
+    uint8_t isMainLabel = static_cast<uint8_t>(inst.getLabel().lexeme == "main");
+
+	return AssembledInst(
+        (labelOpcode << 2) + (isMainLabel << 1),
+        0b00000000, 
+        0b00000000, 
+        0b00000000
+    );
 }
 
 /*

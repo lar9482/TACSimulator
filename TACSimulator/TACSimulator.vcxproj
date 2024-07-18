@@ -70,6 +70,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -144,6 +148,7 @@
     <ClInclude Include="include\Simulator\SimulatorEnums.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assemblyFiles\branchInst.asm" />
     <None Include="assemblyFiles\jumpLink.asm" />
     <None Include="assemblyFiles\loopGreaterThan.asm" />
     <None Include="assemblyFiles\loopLessThan.asm" />

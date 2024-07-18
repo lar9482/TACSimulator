@@ -42,6 +42,10 @@ void Simulator::loadProgramIntoRAM(const std::string& filePath) {
         RAM->at(addressCounter+2) = thirdByte;
         RAM->at(addressCounter+3) = fourthByte;
 
+        if (isMainLabel(firstByte)) {
+            registers[PCRegister] = addressCounter;
+        }
+
         addressCounter += 4;
     }
 
@@ -55,6 +59,17 @@ void Simulator::executeProgram() {
         executeInst(disassembledInst);
         registers[PCRegister] += 4;
     }
+}
+
+/*
+ * Form: ooooooM0 00000000 00000000 00000000
+ * o: Testing that o is the label
+ * M: Testing that M is 1, which indicates a main label
+ */
+bool Simulator::isMainLabel(const uint8_t& firstByte) {
+    return (static_cast<Opcode>((firstByte & 0b1111'1100) >> 2) == Opcode::label_Inst)
+        &&
+    (((firstByte & 0b0000'0010) >> 1) == 1);
 }
 
 array<uint8_t, 4> Simulator::fetchInst() const {
@@ -165,7 +180,9 @@ void Simulator::executeInst(const DisassembledInst& inst) {
     case Opcode::sra_Inst: 
         registers[inst.reg1] = registers[inst.reg2] >> inst.immediate;
         break;
-    case Opcode::bEq_Inst: break;
+    case Opcode::bEq_Inst: 
+        
+        break;
     case Opcode::bNe_Inst: break;
     case Opcode::bLt_Inst: break;
     case Opcode::bGt_Inst: break;

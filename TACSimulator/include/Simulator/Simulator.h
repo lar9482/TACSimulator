@@ -42,6 +42,7 @@ private:
     bool exitProgram;
 
 private:
+    bool isMainLabel(const uint8_t& firstByte);
     std::array<uint8_t, 4> fetchInst() const ;
     DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst) const ;
     void executeInst(const DisassembledInst& inst);
