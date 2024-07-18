@@ -9,7 +9,7 @@
 using std::string;
 
 int main() {
-    string fileName = "branchInst";
+    string fileName = "jumpLink";
     string input = "./assemblyFiles/" + fileName + ".asm";
     string output = "./assemblyFiles/output/" + fileName + ".out";
 

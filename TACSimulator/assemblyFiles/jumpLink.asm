@@ -2,12 +2,13 @@ function1:
     movI r10, 1000
     movI r11, 2000
     movI r12, 3000
+    movI r13, 4000
     jmpReg rRET
 
 function2:
-    movI r1, 10
-    movI r2, 20
-    movI r3, 30
+    movI r10, 10
+    movI r11, 20
+    movI r12, 30
     jmpReg rRET
 
 main:

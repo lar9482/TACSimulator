@@ -43,7 +43,7 @@ void Simulator::loadProgramIntoRAM(const std::string& filePath) {
         RAM->at(addressCounter+3) = fourthByte;
 
         if (isMainLabel(firstByte)) {
-            registers[PCRegister] = addressCounter;
+            registers[IPRegister] = addressCounter;
         }
 
         addressCounter += 4;
@@ -57,7 +57,7 @@ void Simulator::executeProgram() {
         array<uint8_t, 4> fetchedInst = fetchInst();
         DisassembledInst disassembledInst = decodeInst(fetchedInst);
         executeInst(disassembledInst);
-        registers[PCRegister] += 4;
+        registers[IPRegister] += 4;
     }
 }
 
@@ -74,10 +74,10 @@ bool Simulator::isMainLabel(const uint8_t& firstByte) {
 
 array<uint8_t, 4> Simulator::fetchInst() const {
     array<uint8_t, 4> fetchedInst;
-    fetchedInst[0] = RAM->at(registers[PCRegister]);
-    fetchedInst[1] = RAM->at(registers[PCRegister] + 1);
-    fetchedInst[2] = RAM->at(registers[PCRegister] + 2);
-    fetchedInst[3] = RAM->at(registers[PCRegister] + 3);
+    fetchedInst[0] = RAM->at(registers[IPRegister]);
+    fetchedInst[1] = RAM->at(registers[IPRegister] + 1);
+    fetchedInst[2] = RAM->at(registers[IPRegister] + 2);
+    fetchedInst[3] = RAM->at(registers[IPRegister] + 3);
 
     return fetchedInst;
 }
@@ -183,51 +183,59 @@ void Simulator::executeInst(const DisassembledInst& inst) {
     case Opcode::bEq_Inst:
     {
         if (registers[inst.reg1] == registers[inst.reg2]) {
-            registers[PCRegister] += inst.immediate << 2;
+            registers[IPRegister] += inst.immediate << 2;
         }
     }
         break;
     case Opcode::bNe_Inst:
     {
         if (registers[inst.reg1] != registers[inst.reg2]) {
-            registers[PCRegister] += inst.immediate << 2;
+            registers[IPRegister] += inst.immediate << 2;
         }
     }
         break;
     case Opcode::bLt_Inst: 
     {
         if (registers[inst.reg1] < registers[inst.reg2]) {
-            registers[PCRegister] += inst.immediate << 2;
+            registers[IPRegister] += inst.immediate << 2;
         }
     }
         break;
     case Opcode::bGt_Inst: 
     {
         if (registers[inst.reg1] > registers[inst.reg2]) {
-            registers[PCRegister] += inst.immediate << 2;
+            registers[IPRegister] += inst.immediate << 2;
         }
     }
         break;
     case Opcode::bLTz_Inst: 
     {
         if (registers[inst.reg1] <= 0) {
-            registers[PCRegister] += inst.immediate << 2;
+            registers[IPRegister] += inst.immediate << 2;
         }
     }
         break;
     case Opcode::bGTz_Inst: 
     {
         if (registers[inst.reg1] >= 0) {
-            registers[PCRegister] += inst.immediate << 2;
+            registers[IPRegister] += inst.immediate << 2;
         }
     }
         break;
     case Opcode::jmp_Inst:
-        registers[PCRegister] += inst.immediate << 2;
+        registers[IPRegister] += inst.immediate << 2;
         break;
-    case Opcode::jmpL_Inst: break;
-    case Opcode::jmpL_Reg_Inst: break;
-    case Opcode::jmpReg_Inst: break;
+    case Opcode::jmpL_Inst: 
+        registers[RETRegister] = registers[IPRegister];
+        registers[IPRegister] += inst.immediate << 2;
+        break;
+    case Opcode::jmpL_Reg_Inst: 
+        registers[RETRegister] = registers[IPRegister];
+        registers[IPRegister] = registers[inst.reg1];
+        break;
+    case Opcode::jmpReg_Inst: 
+        registers[IPRegister] = registers[inst.reg1];
+        break;
     case Opcode::lb_Inst: break;
     case Opcode::lw_Inst: break;
     case Opcode::sb_Inst: break;
