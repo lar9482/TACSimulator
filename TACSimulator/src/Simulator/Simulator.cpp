@@ -194,10 +194,34 @@ void Simulator::executeInst(const DisassembledInst& inst) {
         }
     }
         break;
-    case Opcode::bLt_Inst: break;
-    case Opcode::bGt_Inst: break;
-    case Opcode::bLTz_Inst: break;
-    case Opcode::bGTz_Inst: break;
+    case Opcode::bLt_Inst: 
+    {
+        if (registers[inst.reg1] < registers[inst.reg2]) {
+            registers[PCRegister] += inst.immediate << 2;
+        }
+    }
+        break;
+    case Opcode::bGt_Inst: 
+    {
+        if (registers[inst.reg1] > registers[inst.reg2]) {
+            registers[PCRegister] += inst.immediate << 2;
+        }
+    }
+        break;
+    case Opcode::bLTz_Inst: 
+    {
+        if (registers[inst.reg1] <= 0) {
+            registers[PCRegister] += inst.immediate << 2;
+        }
+    }
+        break;
+    case Opcode::bGTz_Inst: 
+    {
+        if (registers[inst.reg1] >= 0) {
+            registers[PCRegister] += inst.immediate << 2;
+        }
+    }
+        break;
     case Opcode::jmp_Inst:
         registers[PCRegister] += inst.immediate << 2;
         break;
