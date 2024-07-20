@@ -9,7 +9,7 @@
 using std::string;
 
 int main() {
-    string fileName = "jumpLink";
+    string fileName = "memInst";
     string input = "./assemblyFiles/" + fileName + ".asm";
     string output = "./assemblyFiles/output/" + fileName + ".out";
 

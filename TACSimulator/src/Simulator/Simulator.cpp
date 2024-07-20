@@ -236,10 +236,39 @@ void Simulator::executeInst(const DisassembledInst& inst) {
     case Opcode::jmpReg_Inst: 
         registers[IPRegister] = registers[inst.reg1];
         break;
-    case Opcode::lb_Inst: break;
-    case Opcode::lw_Inst: break;
-    case Opcode::sb_Inst: break;
-    case Opcode::sw_Inst: break;
+    case Opcode::lb_Inst: 
+        registers[inst.reg1] = RAM->at(registers[inst.reg2] + inst.immediate);
+        break;
+    case Opcode::lw_Inst: 
+    {
+        uint8_t firstByte = static_cast<uint8_t>(RAM->at(registers[inst.reg2] + inst.immediate));
+        uint8_t secondByte = static_cast<uint8_t>(RAM->at(registers[inst.reg2] + inst.immediate + 1));
+        uint8_t thirdByte = static_cast<uint8_t>(RAM->at(registers[inst.reg2] + inst.immediate + 2));
+        uint8_t fourthByte = static_cast<uint8_t>(RAM->at(registers[inst.reg2] + inst.immediate + 3));
+        
+        registers[inst.reg1] = 
+            (fourthByte << 24) +
+            (thirdByte << 16) +
+            (secondByte << 8) +
+            firstByte;
+    }
+        break;
+    case Opcode::sb_Inst: 
+        RAM->at(registers[inst.reg2] + inst.immediate) = registers[inst.reg1] & 0x000000FF;
+        break;
+    case Opcode::sw_Inst: 
+    {
+        uint8_t firstByte = static_cast<uint8_t>(registers[inst.reg1] & 0x00'00'00'FF);
+        uint8_t secondByte = static_cast<uint8_t>((registers[inst.reg1] & 0x00'00'FF'00) >> 8);
+        uint8_t thirdByte = static_cast<uint8_t>((registers[inst.reg1] & 0x00'FF'00'00) >> 16);
+        uint8_t fourthByte = static_cast<uint8_t>((registers[inst.reg1] & 0xFF'00'00'00) >> 24);
+
+        RAM->at(registers[inst.reg2] + inst.immediate) = firstByte;
+        RAM->at(registers[inst.reg2] + inst.immediate + 1) = secondByte;
+        RAM->at(registers[inst.reg2] + inst.immediate + 2) = thirdByte;
+        RAM->at(registers[inst.reg2] + inst.immediate + 3) = fourthByte;
+    }
+        break;
     case Opcode::trap_Inst: 
         executeTrap(static_cast<Trapcode>(inst.immediate));
         break;
