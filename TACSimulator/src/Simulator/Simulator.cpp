@@ -13,7 +13,7 @@ using std::vector;
 using std::array;
 
 Simulator::Simulator() :
-    RAM(std::make_unique<std::array<uint8_t, 0xFFFF>>()), 
+    RAM(std::make_unique<std::array<uint8_t, 0x1FFFFFFF>>()),
     exitProgram(false)
 {
     RAM->fill(0);
@@ -66,7 +66,7 @@ void Simulator::executeProgram() {
  * o: Testing that o is the label
  * M: Testing that M is 1, which indicates a main label
  */
-bool Simulator::isMainLabel(const uint8_t& firstByte) {
+bool Simulator::isMainLabel(const uint8_t& firstByte) const {
     return (static_cast<Opcode>((firstByte & 0b1111'1100) >> 2) == Opcode::label_Inst)
         &&
     (((firstByte & 0b0000'0010) >> 1) == 1);
@@ -241,10 +241,10 @@ void Simulator::executeInst(const DisassembledInst& inst) {
         break;
     case Opcode::lw_Inst: 
     {
-        uint8_t firstByte = static_cast<uint8_t>(RAM->at(registers[inst.reg2] + inst.immediate));
-        uint8_t secondByte = static_cast<uint8_t>(RAM->at(registers[inst.reg2] + inst.immediate + 1));
-        uint8_t thirdByte = static_cast<uint8_t>(RAM->at(registers[inst.reg2] + inst.immediate + 2));
-        uint8_t fourthByte = static_cast<uint8_t>(RAM->at(registers[inst.reg2] + inst.immediate + 3));
+        uint8_t firstByte = RAM->at(registers[inst.reg2] + inst.immediate);
+        uint8_t secondByte = RAM->at(registers[inst.reg2] + inst.immediate + 1);
+        uint8_t thirdByte = RAM->at(registers[inst.reg2] + inst.immediate + 2);
+        uint8_t fourthByte = RAM->at(registers[inst.reg2] + inst.immediate + 3);
         
         registers[inst.reg1] = 
             (fourthByte << 24) +

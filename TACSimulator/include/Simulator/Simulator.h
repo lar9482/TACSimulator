@@ -35,7 +35,7 @@ public:
 
 private:
 
-    std::unique_ptr<std::array<uint8_t, 0xFFFF>> RAM;
+    std::unique_ptr<std::array<uint8_t, 0x1FFFFFFF>> RAM;
     std::array<int32_t, 32> registers;
     const uint8_t IPRegister = 31;
     const uint8_t TrapRegister = 27;
@@ -43,9 +43,9 @@ private:
     bool exitProgram;
 
 private:
-    bool isMainLabel(const uint8_t& firstByte);
-    std::array<uint8_t, 4> fetchInst() const ;
-    DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst) const ;
+    bool isMainLabel(const uint8_t& firstByte) const;
+    std::array<uint8_t, 4> fetchInst() const;
+    DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst) const;
     void executeInst(const DisassembledInst& inst);
     void executeTrap(const Trapcode& trapCode);
 };
