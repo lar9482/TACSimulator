@@ -149,7 +149,7 @@ private:
 	Token reg2;
 
 public:
-	LoadStore(const Token& opcode, const const Token& reg1, const const Token& offset, const Token& reg2);
+	LoadStore(const Token& opcode, const Token& reg1, const Token& offset, const Token& reg2);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
