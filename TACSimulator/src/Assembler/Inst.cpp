@@ -1,7 +1,7 @@
 #include "../Assembler/Inst.h"
 #include "../Assembler/Token.h"
 
-ArithLogI::ArithLogI(Token& opcode, Token& reg1, Token& reg2, Token& integer) :
+ArithLogI::ArithLogI(const Token& opcode, const Token& reg1, const Token& reg2, const Token& integer) :
     Inst(opcode),
     reg1(reg1),
     reg2(reg2),
@@ -11,7 +11,7 @@ AssembledInst ArithLogI::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-Branch::Branch(Token& opcode, Token& reg1, Token& reg2, Token& label) :
+Branch::Branch(const Token& opcode, const Token& reg1, const Token& reg2, const Token& label) :
     Inst(opcode),
     reg1(reg1),
     reg2(reg2),
@@ -22,7 +22,7 @@ AssembledInst Branch::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-BranchZ::BranchZ(Token& opcode, Token& reg, Token& label) :
+BranchZ::BranchZ(const Token& opcode, const Token& reg, const Token& label) :
     Inst(opcode),
     reg(reg),
     label(label)
@@ -32,7 +32,7 @@ AssembledInst BranchZ::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-LoadStore::LoadStore(Token& opcode, Token& reg1, Token& offset, Token& reg2) :
+LoadStore::LoadStore(const Token& opcode, const Token& reg1, const Token& offset, const Token& reg2) :
     Inst(opcode),
     reg1(reg1),
     offset(offset),
@@ -43,7 +43,7 @@ AssembledInst LoadStore::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-Jump::Jump(Token& opcode, Token& label) :
+Jump::Jump(const Token& opcode, const Token& label) :
     Inst(opcode),
     label(label)
 {}
@@ -52,7 +52,7 @@ AssembledInst Jump::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-JumpR::JumpR(Token& opcode, Token& reg) :
+JumpR::JumpR(const Token& opcode, const Token& reg) :
     Inst(opcode),
     reg(reg)
 {}
@@ -61,7 +61,7 @@ AssembledInst JumpR::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-Move::Move(Token& opcode, Token& reg1, Token& reg2) :
+Move::Move(const Token& opcode, const Token& reg1, const Token& reg2) :
     Inst(opcode),
     reg1(reg1),
     reg2(reg2)
@@ -71,7 +71,7 @@ AssembledInst Move::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-MoveI::MoveI(Token& opcode, Token& reg, Token& integer) :
+MoveI::MoveI(const Token& opcode, const Token& reg, const Token& integer) :
     Inst(opcode),
     reg(reg),
     integer(integer)
@@ -81,7 +81,7 @@ AssembledInst MoveI::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-ArithLog::ArithLog(Token& opcode, Token& reg1, Token& reg2, Token& reg3) :
+ArithLog::ArithLog(const Token& opcode, const Token& reg1, const Token& reg2, const Token& reg3) :
     Inst(opcode),
     reg1(reg1),
     reg2(reg2),
@@ -92,7 +92,7 @@ AssembledInst ArithLog::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-Shift::Shift(Token& opcode, Token& reg1, Token& reg2, Token& integer) :
+Shift::Shift(const Token& opcode, const Token& reg1, const Token& reg2, const Token& integer) :
     Inst(opcode),
     reg1(reg1),
     reg2(reg2),
@@ -103,7 +103,7 @@ AssembledInst Shift::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-ShiftV::ShiftV(Token& opcode, Token& reg1, Token& reg2, Token& reg3) :
+ShiftV::ShiftV(const Token& opcode, const Token& reg1, const Token& reg2, const Token& reg3) :
     Inst(opcode),
     reg1(reg1),
     reg2(reg2),
@@ -114,7 +114,7 @@ AssembledInst ShiftV::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-Label::Label(Token& opcode, Token& label) :
+Label::Label(const Token& opcode, const Token& label) :
     Inst(opcode),
     label(label)
 {}
@@ -123,7 +123,7 @@ AssembledInst Label::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-Trap::Trap(Token& opcode, Token& trapCode) :
+Trap::Trap(const Token& opcode, const Token& trapCode) :
     Inst(opcode),
     trapCode(trapCode)
 {}

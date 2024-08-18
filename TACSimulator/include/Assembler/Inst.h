@@ -16,8 +16,11 @@ struct AssembledInst {
 	uint8_t byte3;
 	uint8_t byte4;
 
-	AssembledInst(const uint8_t& byte1, const uint8_t& byte2,
-		const uint8_t& byte3, const uint8_t& byte4
+	AssembledInst(
+		uint8_t byte1, 
+		uint8_t byte2,
+		uint8_t byte3, 
+		uint8_t byte4
 	) : byte1(byte1), byte2(byte2),
 		byte3(byte3), byte4(byte4) {}
 };
@@ -67,7 +70,7 @@ private:
 
 protected:
 
-	Inst(Token& opcode)
+	Inst(const Token& opcode)
 		: opcode(opcode)
 	{}
 	Inst(const Inst&) = default;
@@ -91,7 +94,7 @@ private:
 	Token integer;
 
 public:
-	ArithLogI(Token& opcode, Token& reg1, Token& reg2, Token& integer);
+	ArithLogI(const Token& opcode, const Token& reg1, const Token& reg2, const Token& integer);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -110,7 +113,7 @@ private:
 	Token label;
 
 public:
-	Branch(Token& opcode, Token& reg1, Token& reg2, Token& label);
+	Branch(const Token& opcode, const Token& reg1, const Token& reg2, const Token& label);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -128,7 +131,7 @@ private:
 	Token label;
 
 public:
-	BranchZ(Token& opcode, Token& reg, Token& label);
+	BranchZ(const Token& opcode, const Token& reg, const Token& label);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -146,7 +149,7 @@ private:
 	Token reg2;
 
 public:
-	LoadStore(Token& opcode, Token& reg1, Token& offset, Token& reg2);
+	LoadStore(const Token& opcode, const const Token& reg1, const const Token& offset, const Token& reg2);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -163,7 +166,7 @@ private:
 	Token label;
 
 public:
-	Jump(Token& opcode, Token& label);
+	Jump(const Token& opcode, const Token& label);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -177,7 +180,7 @@ private:
 	Token reg;
 
 public:
-	JumpR(Token& opcode, Token& reg);
+	JumpR(const Token& opcode, const Token& reg);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -193,7 +196,7 @@ private:
 	Token reg2;
 
 public:
-	Move(Token& opcode, Token& reg1, Token& reg2);
+	Move(const Token& opcode, const Token& reg1, const Token& reg2);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<Move>(*this);
@@ -209,7 +212,7 @@ private:
 	Token integer;
 
 public:
-	MoveI(Token& opcode, Token& reg, Token& integer);
+	MoveI(const Token& opcode, const Token& reg, const Token& integer);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 	std::unique_ptr<Inst> clone() const override {
 		return std::make_unique<MoveI>(*this);
@@ -226,7 +229,7 @@ private:
 	Token reg3;
 
 public:
-	ArithLog(Token& opcode, Token& reg1, Token& reg2, Token& reg3);
+	ArithLog(const Token& opcode, const Token& reg1, const Token& reg2, const Token& reg3);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -245,7 +248,7 @@ private:
 	Token integer;
 
 public:
-	Shift(Token& opcode, Token& reg1, Token& reg2, Token& integer);
+	Shift(const Token& opcode, const Token& reg1, const Token& reg2, const Token& integer);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -264,7 +267,7 @@ private:
 	Token reg3;
 
 public:
-	ShiftV(Token& opcode, Token& reg1, Token& reg2, Token& reg3);
+	ShiftV(const Token& opcode, const Token& reg1, const Token& reg2, const Token& reg3);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -281,7 +284,7 @@ private:
 	Token label;
 
 public:
-	Label(Token& opcode, Token& label);
+	Label(const Token& opcode, const Token& label);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {
@@ -295,7 +298,7 @@ class Trap : public Inst {
 private:
 	Token trapCode;
 public:
-	Trap(Token& opcode, Token& trapCode);
+	Trap(const Token& opcode, const Token& trapCode);
 	AssembledInst assembleInst(const InstVisitor& visitor) const override;
 
 	std::unique_ptr<Inst> clone() const override {

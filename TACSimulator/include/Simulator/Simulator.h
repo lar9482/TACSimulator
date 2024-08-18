@@ -14,11 +14,11 @@ struct DisassembledInst {
     int16_t immediate;
 
     DisassembledInst(
-        const uint8_t& opcode,
-        const uint8_t& reg1,
-        const uint8_t& reg2,
-        const uint8_t& reg3,
-        const int16_t& immediate
+        uint8_t opcode,
+        uint8_t reg1,
+        uint8_t reg2,
+        uint8_t reg3,
+        int16_t immediate
     ) : opcode(opcode),
         reg1(reg1),
         reg2(reg2),
