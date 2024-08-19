@@ -30,8 +30,8 @@ enum class TokenType {
     r23_Reg,
     r24_Reg,
     r25_Reg,
-    r26_Reg,
-    rT_Reg, //Trap system call register 
+    rTI_Reg, //Trap system call input register
+    rTO_Reg, //Trap system call output register 
     rSP_Reg, //Stack pointer register
     rFP_Reg, //Frame pointer register 
     rRET_Reg, //Return pointer register

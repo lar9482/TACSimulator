@@ -279,7 +279,7 @@ void Simulator::executeInst(const DisassembledInst& inst) {
 void Simulator::executeTrap(const Trapcode& trapCode) {
     switch (trapCode) {
     case Trapcode::print_int: 
-        std::cout << registers[TrapRegister];
+        std::cout << registers[TrapOutputRegister];
         break;
     case Trapcode::print_string: break;
     case Trapcode::println_string: break;

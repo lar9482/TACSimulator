@@ -38,7 +38,8 @@ private:
     std::unique_ptr<std::array<uint8_t, 0x1FFFFFFF>> RAM;
     std::array<int32_t, 32> registers;
     const uint8_t IPRegister = 31;
-    const uint8_t TrapRegister = 27;
+    const uint8_t TrapInputRegister = 26;
+    const uint8_t TrapOutputRegister = 27;
     const uint8_t RETRegister = 30;
     bool exitProgram;
 

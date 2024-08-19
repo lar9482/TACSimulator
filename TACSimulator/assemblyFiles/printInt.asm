@@ -1,3 +1,3 @@
 main:
-    movI rT, 1000
+    movI rTO, 1000
     trap 0

@@ -307,8 +307,8 @@ Token Parser::parseReg() {
         case TokenType::r23_Reg:
         case TokenType::r24_Reg:
         case TokenType::r25_Reg:
-        case TokenType::r26_Reg:
-        case TokenType::rT_Reg:
+        case TokenType::rTI_Reg:
+        case TokenType::rTO_Reg:
         case TokenType::rSP_Reg:
         case TokenType::rFP_Reg:
         case TokenType::rRET_Reg:

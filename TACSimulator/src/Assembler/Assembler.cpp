@@ -154,8 +154,8 @@ uint8_t Assembler::assembleRegister(const Token& reg) const {
     case TokenType::r23_Reg:   return 0b10111;
     case TokenType::r24_Reg:   return 0b11000;
     case TokenType::r25_Reg:   return 0b11001;
-    case TokenType::r26_Reg:   return 0b11010;
-    case TokenType::rT_Reg:    return 0b11011;
+    case TokenType::rTI_Reg:   return 0b11010;
+    case TokenType::rTO_Reg:   return 0b11011;
     case TokenType::rSP_Reg:   return 0b11100;
     case TokenType::rFP_Reg:   return 0b11101;
     case TokenType::rRET_Reg:  return 0b11110;
@@ -497,13 +497,13 @@ AssembledInst Assembler::visit(const Label& inst) const {
  * i: Trapcode
  * 
  * i   Name               Input                            Output                         Description:
- * 0:  print_int          rT has int to print              -                              Print an int value to standard output in decimal.    
- * 1:  print_string       rT has ASCIIZ address to print   -                              Print an ASCIIZ string to standard output.
- * 2:  println_string     rT has ASCIIZ address to print   -                              Print an ASCIIZ string to standard output with a newline
- * 3:  read_int           -                                rT has int that has read       Reads an int value into rT
- * 4:  read_string        -                                rT has the starting address    Reads an ASCIIZ value, then placing the starting address into rT
- * 5:  malloc             -                                rT has the starting address    Allocates rT bytes on the heap
- * 6:  free               rT has the starting address      -                              Frees the bytes starting at rT
+ * 0:  print_int          rTI has int to print             -                              Print an int value to standard output in decimal.    
+ * 1:  print_string       rTI has ASCIIZ address to print  -                              Print an ASCIIZ string to standard output.
+ * 2:  println_string     rTI has ASCIIZ address to print  -                              Print an ASCIIZ string to standard output with a newline
+ * 3:  read_int           -                                rTO has int that has read      Reads an int value into rT
+ * 4:  read_string        -                                rTO has the starting address   Reads an ASCIIZ value, then placing the starting address into rT
+ * 5:  malloc             rTI has N bytes to allocate      rTO has the starting address   Allocates rTI bytes on the heap
+ * 6:  free               rTI has the address to allocate  -                              Frees the bytes starting at rT
  * 7:  exit               -                                -                              Terminate the program
  */
 AssembledInst Assembler::visit(const Trap& inst) const {

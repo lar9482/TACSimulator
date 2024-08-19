@@ -182,8 +182,8 @@ Token Lexer::resolveIdentifier(string const& identifier) const {
     else if (identifier == "r23") return Token(identifier, TokenType::r23_Reg, lineCounter, columnCounter);
     else if (identifier == "r24") return Token(identifier, TokenType::r24_Reg, lineCounter, columnCounter);
     else if (identifier == "r25") return Token(identifier, TokenType::r25_Reg, lineCounter, columnCounter);
-    else if (identifier == "r26") return Token(identifier, TokenType::r26_Reg, lineCounter, columnCounter);
-    else if (identifier == "rT") return Token(identifier, TokenType::rT_Reg, lineCounter, columnCounter);
+    else if (identifier == "rTI") return Token(identifier, TokenType::rTI_Reg, lineCounter, columnCounter);
+    else if (identifier == "rTO") return Token(identifier, TokenType::rTO_Reg, lineCounter, columnCounter);
     else if (identifier == "rSP") return Token(identifier, TokenType::rSP_Reg, lineCounter, columnCounter);
     else if (identifier == "rFP") return Token(identifier, TokenType::rFP_Reg, lineCounter, columnCounter);
     else if (identifier == "rRET") return Token(identifier, TokenType::rRET_Reg, lineCounter, columnCounter);
