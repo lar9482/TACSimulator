@@ -5,7 +5,7 @@
 #include "../TACSimulator/include/Assembler/Assembler.h"
 
 using std::string;
-using Microsoft::VisualStudio::CppUnitTestFramework::Assert;
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TACSimulatorTests
 {
