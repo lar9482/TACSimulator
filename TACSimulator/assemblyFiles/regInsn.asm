@@ -4,7 +4,7 @@ main:
     add r3, r3, r1
     sub r4, r4, r1
 
-    movI r5, 2500
+    movI r5, 3000
     div r5, r5, r1
 
     movI r6, 500

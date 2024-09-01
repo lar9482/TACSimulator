@@ -43,7 +43,7 @@ void Simulator::loadProgramIntoRAM(const std::string& filePath) {
         RAM->at(addressCounter+3) = fourthByte;
 
         if (isMainLabel(firstByte)) {
-            registers[IPRegister] = addressCounter;
+            registers[IPRegister] = static_cast<int32_t>(addressCounter);
         }
 
         addressCounter += 4;
@@ -82,8 +82,17 @@ array<uint8_t, 4> Simulator::fetchInst() const {
     return fetchedInst;
 }
 
-// ooooooss sssttttt ddddd000 00000000
-// ooooooss sssttttt Miiiiiii iiiiiiii
+/*
+ * ooooooss sssttttt ddddd000 00000000
+ * ooooooss sssttttt Miiiiiii iiiiiiii
+ * 
+ * o: opcode
+ * s: register 1
+ * t: register 2
+ * d: register 3
+ * M: sign of immediate
+ * i: immediate
+ */
 DisassembledInst Simulator::decodeInst(const std::array<uint8_t, 4>& fetchedInst) const {
     uint8_t opcode = (fetchedInst[0] & 0b1111'1100) >> 2;
     uint8_t reg1 = ((fetchedInst[0] & 0b0000'0011) << 3) + ((fetchedInst[1] & 0b1110'0000) >> 5);
@@ -291,4 +300,16 @@ void Simulator::executeTrap(const Trapcode& trapCode) {
         exitProgram = true;
         break;
     }
+}
+
+void Simulator::malloc(int32_t size) {
+
+}
+
+void Simulator::free(uint8_t addr) {
+
+}
+
+std::array<int32_t, 32> Simulator::dumpRegisters() {
+    return registers;
 }

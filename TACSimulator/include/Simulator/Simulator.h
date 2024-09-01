@@ -32,7 +32,7 @@ public:
     Simulator();
     void loadProgramIntoRAM(const std::string& filePath);
     void executeProgram();
-
+    std::array<int32_t, 32> dumpRegisters();
 private:
 
     std::unique_ptr<std::array<uint8_t, 0x1FFFFFFF>> RAM;
@@ -43,10 +43,15 @@ private:
     const uint8_t RETRegister = 30;
     bool exitProgram;
 
+    uint8_t freeListHeadAddr;
+    const uint8_t freeListHeaderSize = 8;
+
 private:
     bool isMainLabel(const uint8_t& firstByte) const;
     std::array<uint8_t, 4> fetchInst() const;
     DisassembledInst decodeInst(const std::array<uint8_t, 4>& fetchedInst) const;
     void executeInst(const DisassembledInst& inst);
     void executeTrap(const Trapcode& trapCode);
+    void malloc(int32_t size);
+    void free(uint8_t addr);
 };

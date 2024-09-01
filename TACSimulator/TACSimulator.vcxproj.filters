@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="assemblyFiles">
+      <UniqueIdentifier>{190f94a5-f060-4ef7-9e86-b6cfe628f25f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assemblyFiles\output">
+      <UniqueIdentifier>{5931baea-84f6-4769-8339-9b794de710a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TACSimulator.cpp">
@@ -58,23 +64,47 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assemblyFiles\memInst.asm">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="assemblyFiles\loopGreaterThan.asm">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="assemblyFiles\loopLessThan.asm">
-      <Filter>Source Files</Filter>
+    <None Include="assemblyFiles\branchInst.asm">
+      <Filter>assemblyFiles</Filter>
     </None>
     <None Include="assemblyFiles\jumpLink.asm">
-      <Filter>Source Files</Filter>
+      <Filter>assemblyFiles</Filter>
+    </None>
+    <None Include="assemblyFiles\loopGreaterThan.asm">
+      <Filter>assemblyFiles</Filter>
+    </None>
+    <None Include="assemblyFiles\loopLessThan.asm">
+      <Filter>assemblyFiles</Filter>
+    </None>
+    <None Include="assemblyFiles\malloc.asm">
+      <Filter>assemblyFiles</Filter>
+    </None>
+    <None Include="assemblyFiles\memInst.asm">
+      <Filter>assemblyFiles</Filter>
     </None>
     <None Include="assemblyFiles\printInt.asm">
-      <Filter>Source Files</Filter>
+      <Filter>assemblyFiles</Filter>
     </None>
-    <None Include="assemblyFiles\branchInst.asm">
-      <Filter>Source Files</Filter>
+    <None Include="assemblyFiles\output\branchInst.out">
+      <Filter>assemblyFiles\output</Filter>
+    </None>
+    <None Include="assemblyFiles\output\jumpLink.out">
+      <Filter>assemblyFiles\output</Filter>
+    </None>
+    <None Include="assemblyFiles\output\loopGreaterThan.out">
+      <Filter>assemblyFiles\output</Filter>
+    </None>
+    <None Include="assemblyFiles\output\loopLessThan.out">
+      <Filter>assemblyFiles\output</Filter>
+    </None>
+    <None Include="assemblyFiles\output\memInst.out">
+      <Filter>assemblyFiles\output</Filter>
+    </None>
+    <None Include="assemblyFiles\output\printInt.out">
+      <Filter>assemblyFiles\output</Filter>
+    </None>
+    <None Include="assemblyFiles\output\regInsn.out">
+      <Filter>assemblyFiles\output</Filter>
     </None>
   </ItemGroup>
 </Project>
