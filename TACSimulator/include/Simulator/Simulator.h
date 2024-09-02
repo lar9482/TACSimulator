@@ -33,6 +33,13 @@ public:
     void loadProgramIntoRAM(const std::string& filePath);
     void executeProgram();
     std::array<int32_t, 32> dumpRegisters();
+
+    int32_t loadWord(uint32_t addr);
+    void storeWord(uint32_t addr, int32_t word);
+
+    uint8_t loadByte(uint32_t addr);
+    void storeByte(uint32_t addr, uint8_t byte);
+
 private:
 
     std::unique_ptr<std::array<uint8_t, 0x1FFFFFFF>> RAM;

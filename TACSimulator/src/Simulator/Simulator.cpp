@@ -246,37 +246,16 @@ void Simulator::executeInst(const DisassembledInst& inst) {
         registers[IPRegister] = registers[inst.reg1];
         break;
     case Opcode::lb_Inst: 
-        registers[inst.reg1] = RAM->at(registers[inst.reg2] + inst.immediate);
+        registers[inst.reg1] = loadByte(registers[inst.reg2] + inst.immediate);
         break;
     case Opcode::lw_Inst: 
-    {
-        uint8_t firstByte = RAM->at(registers[inst.reg2] + inst.immediate);
-        uint8_t secondByte = RAM->at(registers[inst.reg2] + inst.immediate + 1);
-        uint8_t thirdByte = RAM->at(registers[inst.reg2] + inst.immediate + 2);
-        uint8_t fourthByte = RAM->at(registers[inst.reg2] + inst.immediate + 3);
-        
-        registers[inst.reg1] = 
-            (fourthByte << 24) +
-            (thirdByte << 16) +
-            (secondByte << 8) +
-            firstByte;
-    }
+        registers[inst.reg1] = loadWord(registers[inst.reg2] + inst.immediate);
         break;
     case Opcode::sb_Inst: 
-        RAM->at(registers[inst.reg2] + inst.immediate) = registers[inst.reg1] & 0x000000FF;
+        storeByte(registers[inst.reg2] + inst.immediate, registers[inst.reg1] & 0x000000FF);
         break;
     case Opcode::sw_Inst: 
-    {
-        uint8_t firstByte = static_cast<uint8_t>(registers[inst.reg1] & 0x00'00'00'FF);
-        uint8_t secondByte = static_cast<uint8_t>((registers[inst.reg1] & 0x00'00'FF'00) >> 8);
-        uint8_t thirdByte = static_cast<uint8_t>((registers[inst.reg1] & 0x00'FF'00'00) >> 16);
-        uint8_t fourthByte = static_cast<uint8_t>((registers[inst.reg1] & 0xFF'00'00'00) >> 24);
-
-        RAM->at(registers[inst.reg2] + inst.immediate) = firstByte;
-        RAM->at(registers[inst.reg2] + inst.immediate + 1) = secondByte;
-        RAM->at(registers[inst.reg2] + inst.immediate + 2) = thirdByte;
-        RAM->at(registers[inst.reg2] + inst.immediate + 3) = fourthByte;
-    }
+        storeWord(registers[inst.reg2] + inst.immediate, registers[inst.reg1]);
         break;
     case Opcode::trap_Inst: 
         executeTrap(static_cast<Trapcode>(inst.immediate));
@@ -312,4 +291,36 @@ void Simulator::free(uint8_t addr) {
 
 std::array<int32_t, 32> Simulator::dumpRegisters() {
     return registers;
+}
+
+int32_t Simulator::loadWord(uint32_t addr) {
+    uint8_t firstByte = RAM->at(addr);
+    uint8_t secondByte = RAM->at(addr + 1);
+    uint8_t thirdByte = RAM->at(addr + 2);
+    uint8_t fourthByte = RAM->at(addr + 3);
+
+    return (fourthByte << 24) +
+        (thirdByte << 16) +
+        (secondByte << 8) +
+        firstByte;
+}
+
+void Simulator::storeWord(uint32_t addr, int32_t word) {
+    uint8_t firstByte = static_cast<uint8_t>(word & 0x00'00'00'FF);
+    uint8_t secondByte = static_cast<uint8_t>((word & 0x00'00'FF'00) >> 8);
+    uint8_t thirdByte = static_cast<uint8_t>((word & 0x00'FF'00'00) >> 16);
+    uint8_t fourthByte = static_cast<uint8_t>((word & 0xFF'00'00'00) >> 24);
+
+    RAM->at(addr) = firstByte;
+    RAM->at(addr + 1) = secondByte;
+    RAM->at(addr + 2) = thirdByte;
+    RAM->at(addr + 3) = fourthByte;
+}
+
+uint8_t Simulator::loadByte(uint32_t addr) {
+    return RAM->at(addr);
+}
+
+void Simulator::storeByte(uint32_t addr, uint8_t byte) {
+    RAM->at(addr) = byte;
 }

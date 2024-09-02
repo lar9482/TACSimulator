@@ -23,6 +23,8 @@ private:
 
 		return simulator;
 	}
+	
+
 
 	public:
 		TEST_METHOD(TestRegInsn) {
@@ -54,6 +56,31 @@ private:
 
 			Simulator simulator = runProgram(input, output);
 			std::array<int32_t, 32> registers = simulator.dumpRegisters();
+
+			Assert::IsTrue(registers[1] == -1000);
+			Assert::IsTrue(registers[2] == 200);
+			Assert::IsTrue(registers[3] == 300);
+			Assert::IsTrue(registers[4] == 400);
+
+			Assert::IsTrue(registers[5] == -1000);
+			Assert::IsTrue(registers[6] == -1000);
+			Assert::IsTrue(registers[7] == -1000);
+			Assert::IsTrue(registers[8] == 800);
+			Assert::IsTrue(registers[9] == 900);
+			Assert::IsTrue(registers[10] == 1000);
+
+			Assert::IsTrue(registers[11] == 255);
+			Assert::IsTrue(registers[12] == 255);
+			Assert::IsTrue(registers[13] == 255);
+			Assert::IsTrue(registers[14] == 255);
+
+			Assert::IsTrue(simulator.loadWord(200) == -1000);
+			Assert::IsTrue(simulator.loadWord(290) == -1000);
+			Assert::IsTrue(simulator.loadWord(410) == -1000);
+
+			Assert::IsTrue(simulator.loadByte(800) == 255);
+			Assert::IsTrue(simulator.loadByte(890) == 255);
+			Assert::IsTrue(simulator.loadByte(1010) == 255);
 		}
 	};
 }
