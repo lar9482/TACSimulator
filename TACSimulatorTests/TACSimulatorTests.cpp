@@ -124,5 +124,27 @@ private:
 			Assert::IsTrue(registers[2] == 0);
 			Assert::IsTrue(registers[3] == 100);
 		}
+
+		TEST_METHOD(TestJumpLink) {
+			string fileName = "jumpLink";
+			string input = "../../TACSimulator/assemblyFiles/" + fileName + ".asm";
+			string output = "../../TACSimulator/assemblyFiles/output/" + fileName + ".out";
+			
+			Simulator simulator = runProgram(input, output);
+			std::array<int32_t, 32> registers = simulator.dumpRegisters();
+
+			Assert::IsTrue(registers[10] == 1000);
+			Assert::IsTrue(registers[11] == 2000);
+			Assert::IsTrue(registers[12] == 3000);
+			Assert::IsTrue(registers[13] == 4000);
+
+			Assert::IsTrue(registers[14] == 10);
+			Assert::IsTrue(registers[15] == 20);
+			Assert::IsTrue(registers[16] == 30);
+
+			Assert::IsTrue(registers[4] == 20);
+
+			Assert::IsTrue(registers[30] == 0);
+		}
 	};
 }

@@ -6,9 +6,9 @@ function1:
     jmpReg rRET
 
 function2:
-    movI r10, 10
-    movI r11, 20
-    movI r12, 30
+    movI r14, 10
+    movI r15, 20
+    movI r16, 30
     jmpReg rRET
 
 main:
