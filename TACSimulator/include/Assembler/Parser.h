@@ -10,7 +10,6 @@ private:
 
 	ArithLog parseArithLog();
 	Shift parseShift();
-	ShiftV parseShiftV();
 	Branch parseBranch();
 	BranchZ parseBranchZ();
 	ArithLogI parseArithLogI();

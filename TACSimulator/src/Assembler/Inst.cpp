@@ -103,17 +103,6 @@ AssembledInst Shift::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-ShiftV::ShiftV(const Token& opcode, const Token& reg1, const Token& reg2, const Token& reg3) :
-    Inst(opcode),
-    reg1(reg1),
-    reg2(reg2),
-    reg3(reg3)
-{}
-
-AssembledInst ShiftV::assembleInst(const InstVisitor& visitor) const {
-    return visitor.visit(*this);
-}
-
 Label::Label(const Token& opcode, const Token& label) :
     Inst(opcode),
     label(label)

@@ -235,27 +235,6 @@ AssembledInst Assembler::visit(const Shift& inst) const {
     );
 }
 
- /*
-  * Form: ooooooss sssttttt ddddd000 00000000
-  * o: opcode
-  * s: first register,
-  * t: second register,
-  * d: third register
-  */
-AssembledInst Assembler::visit(const ShiftV& inst) const {
-    uint8_t opcode = assembleOpcode(inst.getOpcode());
-    uint8_t reg1 = assembleRegister(inst.getReg1());
-    uint8_t reg2 = assembleRegister(inst.getReg2());
-    uint8_t reg3 = assembleRegister(inst.getReg3());
-
-    return AssembledInst(
-        (opcode << 2) + ((reg1 & 0b11000) >> 3),
-        ((reg1 & 0b00111) << 5) + reg2,
-        reg3 << 3,
-        0b00000000
-    );
-}
-
 /*
  * Form: ooooooss sssttttt Miiiiiii iiiiiiii
  * o: opcode

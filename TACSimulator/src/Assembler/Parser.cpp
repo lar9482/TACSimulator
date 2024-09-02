@@ -125,22 +125,6 @@ Shift Parser::parseShift() {
 
 /*
  * Parsing instructions in the form:
- * opcode reg1, reg2, reg3
- */
-ShiftV Parser::parseShiftV() {
-    Token opcode = consume(tokenQueue.front().type);
-
-    Token reg1 = parseReg();
-    consume(TokenType::comma);
-    Token reg2 = parseReg();
-    consume(TokenType::comma);
-    Token reg3 = parseReg();
-
-    return ShiftV(opcode, reg1, reg2, reg3);
-}
-
-/*
- * Parsing instructions in the form:
  * opcode reg1, reg2, label
  */
 Branch Parser::parseBranch() {

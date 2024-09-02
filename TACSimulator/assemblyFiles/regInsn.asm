@@ -22,3 +22,8 @@ main:
     movI r11, 10
     srav r10, r10, r1
     sllv r11, r11, r1
+
+    movI r12, 2
+    movI r13, 256
+    sll r12, r12, 7
+    sra r13, r13, 7

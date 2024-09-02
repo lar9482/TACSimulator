@@ -45,6 +45,8 @@ private:
 			Assert::IsTrue(registers[9] == 515);
 			Assert::IsTrue(registers[10] == 1);
 			Assert::IsTrue(registers[11] == 80);
+			Assert::IsTrue(registers[12] == 256);
+			Assert::IsTrue(registers[13] == 2);
 		}
 
 		TEST_METHOD(TestMemInst) {

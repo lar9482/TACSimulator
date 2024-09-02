@@ -23,7 +23,6 @@ public:
 	void assembleFile(const std::string& inputFilePath, const std::string& outputFilePath);
 	AssembledInst visit(const ArithLog& inst) const override;
 	AssembledInst visit(const Shift& inst) const override;
-	AssembledInst visit(const ShiftV& inst) const override;
 	AssembledInst visit(const ArithLogI& inst) const override;
 	AssembledInst visit(const Branch& inst) const override;
 	AssembledInst visit(const BranchZ& inst) const override;

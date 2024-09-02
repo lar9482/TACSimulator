@@ -27,7 +27,6 @@ struct AssembledInst {
 
 class ArithLog;
 class Shift;
-class ShiftV;
 class ArithLogI;
 class Branch;
 class BranchZ;
@@ -50,7 +49,6 @@ protected:
 public:
 	virtual AssembledInst visit(const ArithLog& inst) const = 0;
 	virtual AssembledInst visit(const Shift& inst) const = 0;
-	virtual AssembledInst visit(const ShiftV& inst) const = 0;
 	virtual AssembledInst visit(const ArithLogI& inst) const = 0;
 	virtual AssembledInst visit(const Branch& inst) const = 0;
 	virtual AssembledInst visit(const BranchZ& inst) const = 0;
@@ -258,25 +256,6 @@ public:
 	Token getReg1() const { return reg1; }
 	Token getReg2() const { return reg2; }
 	Token getInteger() const { return integer; }
-};
-
-class ShiftV : public Inst {
-private:
-	Token reg1;
-	Token reg2;
-	Token reg3;
-
-public:
-	ShiftV(const Token& opcode, const Token& reg1, const Token& reg2, const Token& reg3);
-	AssembledInst assembleInst(const InstVisitor& visitor) const override;
-
-	std::unique_ptr<Inst> clone() const override {
-		return std::make_unique<ShiftV>(*this);
-	}
-
-	Token getReg1() const { return reg1; }
-	Token getReg2() const { return reg2; }
-	Token getReg3() const { return reg3; }
 };
 
 class Label : public Inst {
