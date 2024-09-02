@@ -9,7 +9,6 @@ private:
 	std::queue<Token> tokenQueue;
 
 	ArithLog parseArithLog();
-	Shift parseShift();
 	Branch parseBranch();
 	BranchZ parseBranchZ();
 	ArithLogI parseArithLogI();

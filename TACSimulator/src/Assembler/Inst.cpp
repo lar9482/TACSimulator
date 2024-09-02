@@ -92,17 +92,6 @@ AssembledInst ArithLog::assembleInst(const InstVisitor& visitor) const {
     return visitor.visit(*this);
 }
 
-Shift::Shift(const Token& opcode, const Token& reg1, const Token& reg2, const Token& integer) :
-    Inst(opcode),
-    reg1(reg1),
-    reg2(reg2),
-    integer(integer)
-{}
-
-AssembledInst Shift::assembleInst(const InstVisitor& visitor) const {
-    return visitor.visit(*this);
-}
-
 Label::Label(const Token& opcode, const Token& label) :
     Inst(opcode),
     label(label)

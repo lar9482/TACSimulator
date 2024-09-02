@@ -207,35 +207,6 @@ AssembledInst Assembler::visit(const ArithLog& inst) const {
 }
 
 /*
- * Form: ooooooss sssttttt Maaaaaaa aaaaaaaa
- * o: opcode
- * s: first register,
- * t: second register
- * M: Sign of a. 0 is positive, 1 is negative
- * a: Shift amount
- */
-AssembledInst Assembler::visit(const Shift& inst) const {
-    uint8_t opcode = assembleOpcode(inst.getOpcode());
-    uint8_t reg1 = assembleRegister(inst.getReg1());
-    uint8_t reg2 = assembleRegister(inst.getReg2());
-    int rawShift = std::stoi(inst.getInteger().lexeme);
-
-    if (rawShift < -32768 || rawShift > 32768) {
-        throw std::runtime_error(rawShift + " can't be assembled using 15 bits.");
-    }
-    
-    uint8_t sign = (rawShift > 0) ? 0 : 1;
-    uint32_t shift = (rawShift > 0) ? rawShift : -rawShift;
-
-	return AssembledInst(
-        (opcode << 2) + ((reg1 & 0b11000) >> 3),
-        ((reg1 & 0b00111) << 5) + reg2,
-        (sign << 7) + ((shift & 0b1111111'00000000) >> 8),
-        shift & 0b0000000'11111111
-    );
-}
-
-/*
  * Form: ooooooss sssttttt Miiiiiii iiiiiiii
  * o: opcode
  * s: first register,

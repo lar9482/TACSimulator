@@ -109,22 +109,6 @@ ArithLog Parser::parseArithLog() {
 
 /*
  * Parsing instructions in the form:
- * opcode reg1, reg2, integer
- */
-Shift Parser::parseShift() {
-    Token opcode = consume(tokenQueue.front().type);
-
-    Token reg1 = parseReg();
-    consume(TokenType::comma);
-    Token reg2 = parseReg();
-    consume(TokenType::comma);
-    Token integer = consume(TokenType::integer);
-
-    return Shift(opcode, reg1, reg2, integer);
-}
-
-/*
- * Parsing instructions in the form:
  * opcode reg1, reg2, label
  */
 Branch Parser::parseBranch() {
