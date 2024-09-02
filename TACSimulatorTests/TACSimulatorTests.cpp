@@ -23,8 +23,6 @@ private:
 
 		return simulator;
 	}
-	
-
 
 	public:
 		TEST_METHOD(TestRegInsn) {
@@ -81,6 +79,50 @@ private:
 			Assert::IsTrue(simulator.loadByte(800) == 255);
 			Assert::IsTrue(simulator.loadByte(890) == 255);
 			Assert::IsTrue(simulator.loadByte(1010) == 255);
+		}
+
+		TEST_METHOD(TestBranchInst) {
+			string fileName = "branchInst";
+			string input = "../../TACSimulator/assemblyFiles/" + fileName + ".asm";
+			string output = "../../TACSimulator/assemblyFiles/output/" + fileName + ".out";
+
+			Simulator simulator = runProgram(input, output);
+			std::array<int32_t, 32> registers = simulator.dumpRegisters();
+
+			Assert::IsTrue(registers[1] == 100);
+			Assert::IsTrue(registers[2] == 200);
+			Assert::IsTrue(registers[3] == 100);
+			Assert::IsTrue(registers[4] == 100);
+			Assert::IsTrue(registers[5] == 432);
+			Assert::IsTrue(registers[6] == 6746);
+			Assert::IsTrue(registers[7] == 300);
+			Assert::IsTrue(registers[8] == 400);
+		}
+
+		TEST_METHOD(TestLoopLessThan) {
+			string fileName = "loopLessThan";
+			string input = "../../TACSimulator/assemblyFiles/" + fileName + ".asm";
+			string output = "../../TACSimulator/assemblyFiles/output/" + fileName + ".out";
+
+			Simulator simulator = runProgram(input, output);
+			std::array<int32_t, 32> registers = simulator.dumpRegisters();
+
+			Assert::IsTrue(registers[1] == 100);
+			Assert::IsTrue(registers[2] == 100);
+			Assert::IsTrue(registers[3] == 100);
+		}
+
+		TEST_METHOD(TestGreaterLessThan) {
+			string fileName = "loopGreaterThan";
+			string input = "../../TACSimulator/assemblyFiles/" + fileName + ".asm";
+			string output = "../../TACSimulator/assemblyFiles/output/" + fileName + ".out";
+
+			Simulator simulator = runProgram(input, output);
+			std::array<int32_t, 32> registers = simulator.dumpRegisters();
+
+			Assert::IsTrue(registers[1] == 0);
+			Assert::IsTrue(registers[2] == 0);
+			Assert::IsTrue(registers[3] == 100);
 		}
 	};
 }
