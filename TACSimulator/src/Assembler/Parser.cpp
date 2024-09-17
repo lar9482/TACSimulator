@@ -1,5 +1,6 @@
-#include <stdexcept>
 #include "../Assembler/Parser.h"
+
+#include <stdexcept>
 
 using std::queue;
 using std::unique_ptr;

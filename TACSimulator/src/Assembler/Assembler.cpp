@@ -1,3 +1,9 @@
+#include "../Assembler/Assembler.h"
+
+#include "../Assembler/Lexer.h"
+#include "../Assembler/Parser.h"
+#include "../Assembler/Inst.h"
+
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -5,11 +11,6 @@
 #include <memory>
 #include <iomanip>
 #include <iostream>
-
-#include "../Assembler/Assembler.h"
-#include "../Assembler/Lexer.h"
-#include "../Assembler/Parser.h"
-#include "../Assembler/Inst.h"
 
 using std::string;
 using std::queue;

@@ -1,10 +1,11 @@
 #pragma once
+#include "../Simulator/SimulatorEnums.h"
 
 #include <cstdint>
 #include <string>
 #include <vector>
 #include <array>
-#include "../Simulator/SimulatorEnums.h"
+#include <memory>
 
 struct DisassembledInst {
     uint8_t opcode;

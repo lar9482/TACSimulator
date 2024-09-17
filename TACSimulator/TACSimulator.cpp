@@ -1,10 +1,11 @@
 // TACSimulator.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
-#include <memory>
 #include "include/Assembler/Assembler.h"
 #include "include/Simulator/Simulator.h"
+
+#include <iostream>
+#include <memory>
 
 using std::string;
 

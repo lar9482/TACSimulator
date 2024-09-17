@@ -1,4 +1,5 @@
 #include "../Assembler/Inst.h"
+
 #include "../Assembler/Token.h"
 
 ArithLogI::ArithLogI(const Token& opcode, const Token& reg1, const Token& reg2, const Token& integer) :

@@ -1,11 +1,12 @@
 #pragma once
 
+#include "../Assembler/Inst.h"
+
 #include <string>
 #include <exception>
 #include <memory>
 #include <queue>
 #include <unordered_map>
-#include "../Assembler/Inst.h"
 
 class Assembler : public InstVisitor {
 private:

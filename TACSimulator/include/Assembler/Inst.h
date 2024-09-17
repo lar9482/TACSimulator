@@ -1,7 +1,7 @@
 #pragma once
+#include "../Assembler/Token.h"
 
 #include <memory>
-#include "../Assembler/Token.h"
 
 /*
  * This will ultimately be assembled as follows:

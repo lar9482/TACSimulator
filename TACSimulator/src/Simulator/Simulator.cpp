@@ -1,20 +1,19 @@
-#include <iostream>
-#include <fstream>
-#include <exception>
-#include <vector>
-#include <memory>
-#include <array>
-
 #include "../Simulator/Simulator.h"
 #include "../Simulator/SimulatorEnums.h"
 
+#include <iostream>
+#include <fstream>
+#include <exception>
+#include <memory>
+#include <array>
+
 using std::string;
-using std::vector;
 using std::array;
 
 Simulator::Simulator() :
     RAM(std::make_unique<std::array<uint8_t, 0x1FFFFFFF>>()),
-    exitProgram(false)
+    exitProgram(false),
+    freeListHeadAddr(0)
 {
     RAM->fill(0);
     registers.fill(0);
@@ -281,8 +280,10 @@ void Simulator::executeTrap(const Trapcode& trapCode) {
     }
 }
 
-void Simulator::malloc(int32_t size) {
-
+void Simulator::malloc(int32_t numBytes) {
+    if (numBytes < 0) {
+        throw std::runtime_error("Simulator::malloc: Cannot allocate a negative number of bytes");
+    }
 }
 
 void Simulator::free(uint8_t addr) {

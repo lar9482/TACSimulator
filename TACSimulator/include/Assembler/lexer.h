@@ -1,10 +1,9 @@
 #pragma once
-
+#include "Token.h"
 
 #include <string>
 #include <utility>
 #include <queue>
-#include "Token.h"
 
 enum class MatchType {
 	Identifier,

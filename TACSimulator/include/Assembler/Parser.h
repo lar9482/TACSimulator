@@ -1,8 +1,9 @@
 #pragma once
-#include <queue>
 
 #include "Token.h"
 #include "../Assembler/Inst.h"
+
+#include <queue>
 
 class Parser {
 private:
