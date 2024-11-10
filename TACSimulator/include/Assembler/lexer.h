@@ -1,5 +1,6 @@
 #pragma once
-#include "Token.h"
+
+#include "Assembler/Token.h"
 
 #include <string>
 #include <utility>

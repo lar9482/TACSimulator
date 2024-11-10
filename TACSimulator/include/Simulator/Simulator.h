@@ -1,5 +1,6 @@
 #pragma once
-#include "../Simulator/SimulatorEnums.h"
+
+#include "Simulator/SimulatorEnums.h"
 
 #include <cstdint>
 #include <string>

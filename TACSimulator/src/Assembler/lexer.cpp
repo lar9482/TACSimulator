@@ -1,4 +1,6 @@
-#include "../Assembler/Lexer.h"
+#include "Assembler/Lexer.h"
+
+#include "Assembler/Token.h"
 
 #include <string>
 #include <utility>

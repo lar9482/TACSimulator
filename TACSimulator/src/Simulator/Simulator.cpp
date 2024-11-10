@@ -272,7 +272,9 @@ void Simulator::executeTrap(const Trapcode& trapCode) {
     case Trapcode::println_string: break;
     case Trapcode::read_int: break;
     case Trapcode::read_string: break;
-    case Trapcode::malloc: break;
+    case Trapcode::malloc: 
+        malloc(registers[TrapInputRegister]);
+        break;
     case Trapcode::free: break;
     case Trapcode::exit: 
         exitProgram = true;
@@ -284,6 +286,8 @@ void Simulator::malloc(int32_t numBytes) {
     if (numBytes < 0) {
         throw std::runtime_error("Simulator::malloc: Cannot allocate a negative number of bytes");
     }
+
+
 }
 
 void Simulator::free(uint8_t addr) {

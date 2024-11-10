@@ -1,5 +1,5 @@
 #pragma once
-#include "../Assembler/Token.h"
+#include "Assembler/Token.h"
 
 #include <memory>
 

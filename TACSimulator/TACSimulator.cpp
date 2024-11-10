@@ -1,8 +1,8 @@
 // TACSimulator.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "include/Assembler/Assembler.h"
-#include "include/Simulator/Simulator.h"
+#include "Assembler/Assembler.h"
+#include "Simulator/Simulator.h"
 
 #include <iostream>
 #include <memory>
@@ -23,7 +23,7 @@ Simulator runProgram(const string& inputPath, const string& outputPath) {
 }
 
 int main() {
-    string fileName = "printInt";
+    string fileName = "malloc";
     string input = "./assemblyFiles/" + fileName + ".asm";
     string output = "./assemblyFiles/output/" + fileName + ".out";
 

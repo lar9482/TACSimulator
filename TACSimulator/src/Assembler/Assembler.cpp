@@ -1,8 +1,8 @@
-#include "../Assembler/Assembler.h"
+#include "Assembler/Assembler.h"
 
-#include "../Assembler/Lexer.h"
-#include "../Assembler/Parser.h"
-#include "../Assembler/Inst.h"
+#include "Assembler/Lexer.h"
+#include "Assembler/Parser.h"
+#include "Assembler/Inst.h"
 
 #include <string>
 #include <fstream>

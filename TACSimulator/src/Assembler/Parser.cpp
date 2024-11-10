@@ -1,4 +1,4 @@
-#include "../Assembler/Parser.h"
+#include "Assembler/Parser.h"
 
 #include <stdexcept>
 

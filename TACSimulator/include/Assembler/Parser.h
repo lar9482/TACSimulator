@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Token.h"
-#include "../Assembler/Inst.h"
+#include "Assembler/Inst.h"
+#include "Assembler/Token.h"
 
 #include <queue>
 

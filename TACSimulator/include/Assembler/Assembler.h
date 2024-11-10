@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Assembler/Inst.h"
+#include "Assembler/Inst.h"
 
 #include <string>
 #include <exception>
